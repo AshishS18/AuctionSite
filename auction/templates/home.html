@@ -9,9 +9,10 @@
     {% for post in posts %}
     <a href="/auction/{{ post.id }}/"><h2>{{ post.title }}</h2></a>
 <p>{{ post.description }}</p>
-<font size="1">Base price: {{ post.base_price }} €<br>
+<font size="1">Base price: {{ post.base_price }} <br>
     End time: {{ post.end_time }}<br>
     Seller: {{ post.seller.username }}<br></font>
+
 
 {% endfor %}
 {% endblock %}

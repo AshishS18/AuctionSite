@@ -11,6 +11,7 @@ from .models import User, auction, bid
 from .services import get_users, get_auctions
 from django.http.response import JsonResponse, HttpResponse
 
+
 def home(request):
     posts = auction.objects.all()
     return render(request, "home.html", {'posts': posts})
