@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+   <strong>{{ msg }}</strong>
+
+<h2>{{ auctioneer.title }}</h2>
+<h4>{{ auctioneer.description }}</h4>
+<font size="2"><p><b>Base price: {{ auctioneer.base_price }}<br>
+End time: {{ auctioneer.end_time }}<br>
+Seller: {{ auctioneer.seller.username }}<br>
+Status: {{ auctioneer.status }}</b></p></font>
+
+{% if bb %}<FONT COLOR="#FF0000"><h4>Actual bid: {{ bb.amount }}, user: {{ bb.user }}</h4></FONT>{% endif %}
+
+<div style="text-align: left;">
+<h3></h3>
+    <form action="/bidauction/{{ auctioneer.id }}/" method="POST">
+    {% csrf_token %}
+    <input type="search" title='am' id='am' name='am' placeholder="amount">
+    <input type="submit" value="Bid">
+</form>
+
+<h3></h3>
+</div>
+
+
+{% endblock %}
+

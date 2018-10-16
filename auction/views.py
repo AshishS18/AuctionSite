@@ -1,12 +1,43 @@
 from django.shortcuts import render
-from .models import auction
+from .models import auction, bid
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserCreateForm, createAuction, confAuction
 from datetime import datetime, timezone
-import dateutil.parser
-
+import pytz
 
 def home(request):
+    #changing status and is_winning
+    auctions = auction.objects.all()
+    current_time = datetime.now(pytz.timezone('Asia/Kolkata'))
+    for auc in auctions:
+        if auc.start_time > current_time:
+            auc.status = 'U'
+            auc.save()
+        if (auc.end_time > current_time) and (auc.start_time < current_time) and auc.status != 'A':
+            auc.status = 'A'
+            auc.save()
+        if (auc.end_time < current_time) and auc.status == 'A':
+            auc.is_winning = 'F'
+            auc.save()
+
+    bids = bid.objects.all()
+    for b in bids:
+        for a in bids:
+            if (b.auctioneer == a.auctioneer and a != b):
+                if (b.is_winning == True and a.is_winning == True):
+                    if (b.amount > a.amount):
+                        a.is_winning = False
+                        a.save()
+                    else:
+                        b.is_winning = False
+                        b.save()
+        if (b.amount < b.auctioneer.base_price):
+            b.amount = b.auctioneer.base_price + 1
+            b.save()
+        if (b.user == b.auctioneer.seller):
+            b.delete()
+
+
     posts = auction.objects.all()
     return render(request, "home.html", {'posts': posts})
 
@@ -87,50 +118,123 @@ def add_auction(request):
                             location=location)
                 a.save()
                 d = end_time
-                if (d - datetime.now(timezone.utc)).total_seconds() < 86400:
+                if (d - datetime.now(pytz.timezone('Asia/Kolkata'))).total_seconds() < 86400:
                     print('hitted')
-                    message = "The minimum duration of an auction is 24hours. You have to change the deadline."
+                    message = "The minimum duration of an auction is 24hours. You have to change the end time."
                     form = createAuction()
                     return render(request, 'add_auction.html', {'msg': message, 'form': form})
 
                 # form = confAuction()
                 # return render(request, 'confirm_auction.html', {'form': form, "title": title, "description": description, "end_time": end_time, "base_price": base_price, "start_time": start_time, "location": location})
-
                 message = "New auction has been saved"
                 return render(request, 'product_added.html', {'message': message})
-
             else:
                 form = createAuction()
-                return render(request, 'add_auction.html', {'form' : form, "error" : "Not valid data"},
-                                    )
+                return render(request, 'add_auction.html', {'form' : form, "error" : "Not valid data"})
     else:
         message = "You have to log in first"
         posts = auction.objects.all()
         return render(request, "home.html", {'msg': message, 'posts': posts})
 
 
-def save_auction(request):
+# def save_auction(request):
+#     if request.user.is_authenticated:
+#         option = request.POST.get('option', '')
+#         if option == 'Yes':
+#             new_title = request.POST['title']
+#             new_description = request.POST['description']
+#             new_end_time = dateutil.parser.parse(request.POST.get('end_time'))
+#             new_base_price = request.POST['base_price']
+#             new_seller = request.user
+#             new_start_time = dateutil.parser.parse(request.POST.get('start_time'))
+#             new_location = request.POST.get('location')
+#             a = auction(title=new_title, description=new_description, end_time=new_end_time, base_price=new_base_price, seller=new_seller, start_time=new_start_time, location=new_location)
+#             a.save()
+#             # send_mail('New auction created.', "Your new auction has been created successfully.", 'no_repli@yaas.com', [request.user.email,], fail_silently=False)
+#             message = "New auction has been saved and a confirmation email has been sent to your email."
+#             return render('product_added.html', {'message' : message})
+#         else:
+#             error = "Auction is not saved"
+#             form = createAuction()
+#             return render('add_auction.html', {'form' : form, 'error' : error})
+#     else:
+#         message = "You have to log in first"
+#         posts = auction.objects.all()
+#         return render("home.html", {'msg': message, 'posts': posts})
+
+
+def bid_auction(request, id):
+
     if request.user.is_authenticated:
-        option = request.POST.get('option', '')
-        if option == 'Yes':
-            new_title = request.POST['title']
-            new_description = request.POST['description']
-            new_end_time = dateutil.parser.parse(request.POST.get('end_time'))
-            new_base_price = request.POST['base_price']
-            new_seller = request.user
-            new_start_time = dateutil.parser.parse(request.POST.get('start_time'))
-            new_location = request.POST.get('location')
-            a = auction(title=new_title, description=new_description, end_time=new_end_time, base_price=new_base_price, seller=new_seller, start_time=new_start_time, location=new_location)
-            a.save()
-            # send_mail('New auction created.', "Your new auction has been created successfully.", 'no_repli@yaas.com', [request.user.email,], fail_silently=False)
-            message = "New auction has been saved and a confirmation email has been sent to your email."
-            return render('product_added.html', {'message' : message})
+        if request.method == 'POST':
+            amount = request.POST['am']
+            auctions = auction.objects.filter(id=id)
+            if auctions:
+                auctions = auction.objects.get(id=id)
+            else:
+                msg = "Auction not found"
+                return render(request, "auction.html", {'msg': msg})
+
+            if auctions.status != 'A':
+                msg = "Auction not active"
+                return render(request, "auction.html", {'auctioneer':auctions, 'msg': msg})
+            if request.user == auctions.seller:
+                msg = "Can not bid on your own auction"
+                return render(request, "auction.html", {'auctioneer':auctions, 'msg': msg})
+            if auctions.base_price > float(amount) or (float(amount) - auctions.base_price < 1):
+                msg = "Amount have to be at least 1 greater than minimum price."
+                return render(request, "auction.html", {'auctioneer':auctions, 'msg': msg})
+
+            prev_bid_wining = bid.objects.filter(is_winning=True, auctioneer=auctions)
+            if prev_bid_wining:
+                prev_bid_wining = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
+
+            if prev_bid_wining:
+                if prev_bid_wining.user == request.user:
+                    msg = "You are already wining this auction."
+                    return render(request, "auction.html", {'auctioneer':auctions,'bb':prev_bid_wining, 'msg': msg})
+
+                if float(amount) - prev_bid_wining.amount < 1:
+                    msg = "Bid has to be at atleast 1 greater than previous bids."
+                    return render("auction.html", {'auctioneer':auctions,'bb':prev_bid_wining, 'msg': msg})
+
+                prev_bid_wining.is_winning = False
+                prev_bid_wining.save()
+
+            b = bid(user=request.user, amount=amount, auctioneer=auctions, is_winning=True)
+            b.save()
+
+            msg = "Bid saved sucesfully."
+            return render(request, "auction.html", {'auctioneer':auctions,'bb':b, 'msg': msg})
+
         else:
-            error = "Auction is not saved"
-            form = createAuction()
-            return render('add_auction.html', {'form' : form, 'error' : error})
+            auctions = auction.objects.filter(id=id)
+            if auctions:
+                auctions = auction.objects.get(id=id)
+            else:
+                msg = "Auction not found"
+                return render(request, "auction.html", {'msg': msg})
+
+            b = bid.objects.filter(is_winning=True, auctioneer=auctions)
+            if b:
+                b = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
+            return render(request, "auction.html", {'auctioneer':auctions, 'bb':b})
+
     else:
         message = "You have to log in first"
         posts = auction.objects.all()
-        return render("home.html", {'msg': message, 'posts': posts})
+        return render(request, "home.html", {'msg': message, 'posts': posts})
 
+
+def view_auction(request, id):
+    auctioneer = auction.objects.filter(id = id)
+    if auctioneer:
+        auctioneer = auction.objects.get(id = id)
+        bb = bid.objects.filter(is_winning=True, auctioneer=auctioneer)
+        if bb:
+            bb = bid.objects.filter(is_winning=True, auctioneer=auctioneer).get()
+        return render(request, "auction.html", {'auctioneer': auctioneer, 'bb': bb})
+    else:
+        message = "Auction not found."
+        posts = auction.objects.all()
+        return render(request, "home.html", {'msg': message, 'posts': posts})

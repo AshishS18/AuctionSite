@@ -28,8 +28,10 @@ urlpatterns = [
     url(r'^login/$', views.login_view, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^addauction/$', views.add_auction, name='addauction'),
-    url(r'^saveauction/$', views.save_auction, name='saveauction'),
+    # url(r'^saveauction/$', views.save_auction, name='saveauction'),
     url(r'^productadded/$', views.add_auction, name='productadded'),
+    url(r'^auction/(?P<id>\w+)/$', views.view_auction),
+    url(r'^bidauction/(?P<id>\w+)/$', views.bid_auction, name='bidauction'),
     path('admin/', admin.site.urls),
 
 
