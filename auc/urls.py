@@ -37,6 +37,8 @@ urlpatterns = [
     path('auctionlist/<int:id>', views.AuctionDetail.as_view(), name='auction_lists'),
 
     path('bidlist/', views.BidList.as_view(), name='bid_list'),
-    path('auctions/<int:id>', views.auctionPage, name='auctions'),
+
+    path('auctions', views.auctionPage, name='auction'),
+    path('auctions/<int:id>', views.auctionPage, name='auction'),
 
 ]
