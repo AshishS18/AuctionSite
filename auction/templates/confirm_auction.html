@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+<h2> Add Auction</h2>
+{% block content %}
+
+<p><b>Confirm Auction</b></p>
+{% if error %}
+  {{ error}}
+{% endif %}
+
+<b>{{title}}</b>
+
+    <form action="/saveauction/" method="post">
+        {% csrf_token %}
+         {{ form.as_p }}
+         <INPUT TYPE=HIDDEN NAME="description" VALUE="{{description}}">
+         <INPUT TYPE=HIDDEN NAME="title" VALUE="{{title}}">
+         <INPUT TYPE=HIDDEN NAME="start_time" VALUE="{{start_time}}">
+         <INPUT TYPE=HIDDEN NAME="end_time" VALUE="{{end_time}}">
+         <INPUT TYPE=HIDDEN NAME="base_price" VALUE="{{base_price}}">
+        <input TYPE="submit" VALUE="Submit">
+    </form>
+
+
+{% endblock %}
