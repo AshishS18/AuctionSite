@@ -33,6 +33,14 @@ urlpatterns = [
     url(r'^auction/(?P<id>\w+)/$', views.view_auction),
     url(r'^bidauction/(?P<id>\w+)/$', views.bid_auction, name='bidauction'),
     path('admin/', admin.site.urls),
+    path('userlist/', views.UserList.as_view(), name='user_list'),
 
+    path('auctionlist/', views.AuctionList.as_view(), name='auction_list'),
+    path('auctionlist/<int:id>', views.AuctionDetail.as_view(), name='auction_lists'),
+
+    path('bidlist/', views.BidList.as_view(), name='bid_list'),
+
+    path('auctions', views.auctionPage, name='auction'),
+    path('auctions/<int:id>', views.auctionPage, name='auction'),
 
 ]

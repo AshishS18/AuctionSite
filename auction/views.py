@@ -3,6 +3,13 @@ from .models import auction, bid
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserCreateForm, createAuction, confAuction
 from datetime import datetime, timezone
+import dateutil.parser
+from .serializers import AuctionSerializer, BidSerializer, UserSerializer
+from rest_framework.views import APIView
+from rest_framework import generics, filters
+from .models import User, auction, bid
+from .services import get_users, get_auctions
+from django.http.response import JsonResponse, HttpResponse
 import pytz
 
 def home(request):
@@ -100,7 +107,7 @@ def add_auction(request):
     if request.user.is_authenticated:
         if not request.method == 'POST':
             form = createAuction()
-            return render(request, 'add_auction.html', {'form' : form})
+            return render(request, 'add_auction.html', {'form': form})
 
         else:
             form = createAuction(request.POST)
@@ -131,6 +138,7 @@ def add_auction(request):
             else:
                 form = createAuction()
                 return render(request, 'add_auction.html', {'form' : form, "error" : "Not valid data"})
+
     else:
         message = "You have to log in first"
         posts = auction.objects.all()
@@ -164,7 +172,6 @@ def add_auction(request):
 
 
 def bid_auction(request, id):
-
     if request.user.is_authenticated:
         if request.method == 'POST':
             amount = request.POST['am']
@@ -220,6 +227,24 @@ def bid_auction(request, id):
                 b = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
             return render(request, "auction.html", {'auctioneer':auctions, 'bb':b})
 
+        option = request.POST.get('option', '')
+        if option == 'Yes':
+            new_title = request.POST['title']
+            new_description = request.POST['description']
+            new_end_time = dateutil.parser.parse(request.POST.get('end_time'))
+            new_base_price = request.POST['base_price']
+            new_seller = request.user
+            new_start_time = dateutil.parser.parse(request.POST.get('start_time'))
+            new_location = request.POST.get('location')
+            a = auction(title=new_title, description=new_description, end_time=new_end_time, base_price=new_base_price,
+                        seller=new_seller, start_time=new_start_time, location=new_location)
+            a.save()
+            message = "New auction has been saved and a confirmation email has been sent to your email."
+            return render('product_added.html', {'message': message})
+        else:
+            error = "Auction is not saved"
+            form = createAuction()
+            return render('add_auction.html', {'form': form, 'error': error})
     else:
         message = "You have to log in first"
         posts = auction.objects.all()
@@ -238,3 +263,31 @@ def view_auction(request, id):
         message = "Auction not found."
         posts = auction.objects.all()
         return render(request, "home.html", {'msg': message, 'posts': posts})
+
+class AuctionList(generics.ListAPIView):
+    queryset = auction.objects.all()
+    serializer_class = AuctionSerializer
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class BidList(generics.ListAPIView):
+    queryset = bid.objects.all()
+    serializer_class = BidSerializer
+
+
+class AuctionDetail(APIView):
+    def get(self, request, id):
+        specfic_product = auction.objects.filter(seller_id=id)
+        data = AuctionSerializer(specfic_product, many=True)
+        return JsonResponse(data.data, safe=False)
+
+
+def auctionPage(request, id=None):
+    if request.method == 'GET':
+        auctions_list = get_auctions(id)
+        return render(request, 'home.html', {'auctions_list': auctions_list})
+
