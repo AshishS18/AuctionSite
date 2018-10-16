@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^productadded/$', views.add_auction, name='productadded'),
     path('admin/', admin.site.urls),
 
+
 ]
