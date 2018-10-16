@@ -31,6 +31,8 @@ urlpatterns = [
     url(r'^saveauction/$', views.save_auction, name='saveauction'),
     url(r'^productadded/$', views.add_auction, name='productadded'),
     path('admin/', admin.site.urls),
-
+    path('userlist/', views.UserList.as_view(), name='user_list'),
+    path('auctionlist/', views.AuctionList.as_view(), name='auction_list'),
+    path('bidlist/', views.BidList.as_view(), name='bid_list'),
 
 ]
