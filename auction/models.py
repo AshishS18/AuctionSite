@@ -9,6 +9,12 @@ class auction(models.Model):
         ('MUM', 'Mumbai'),
         ('DL', 'Delhi'),
     )
+    status = (
+        ('A', 'Active'),
+        ('U', 'Upcoming'),
+        ('F', 'Finished'),
+    )
+
     title = models.CharField(max_length=150)
     description = models.TextField()
     base_price = models.IntegerField()
@@ -17,8 +23,9 @@ class auction(models.Model):
     end_time = models.DateTimeField()
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=3)
+    status = models.CharField(max_length=1, default='A')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
