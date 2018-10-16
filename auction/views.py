@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import auction
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserCreateForm, createAuction, confAuction
-import datetime
+from datetime import datetime, timezone
 import dateutil.parser
 from .serializers import AuctionSerializer, BidSerializer, UserSerializer
 from rest_framework.views import APIView
@@ -90,12 +90,12 @@ def add_auction(request):
                             base_price=base_price, seller=seller, start_time=start_time,
                             location=location)
                 a.save()
-                # d = datetime.datetime.strptime(end_time, "%d/%m/%Y %H:%M:%S")
-                #
-                # if (d - datetime.datetime.now()).total_seconds() < 86400:
-                #     message = "The minimum duration of an auction is 24hours. You have to change the deadline."
-                #     form = createAuction()
-                #     return render(request, 'add_auction.html', {'msg': message, 'form': form})
+                d = end_time
+                if (d - datetime.now(timezone.utc)).total_seconds() < 86400:
+                    print('hitted')
+                    message = "The minimum duration of an auction is 24hours. You have to change the deadline."
+                    form = createAuction()
+                    return render(request, 'add_auction.html', {'msg': message, 'form': form})
 
                 # form = confAuction()
                 # return render(request, 'confirm_auction.html', {'form': form, "title": title, "description": description, "end_time": end_time, "base_price": base_price, "start_time": start_time, "location": location})
