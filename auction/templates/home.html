@@ -4,21 +4,15 @@
 {% block content %}
    <strong>{{ msg }}</strong>
  {%  if not posts %}
-  <p>{% trans "No auctions." %}<p>
+  <p>No auctions<p>
  {% endif %}
 
 {%  for post in posts %}
-{% if post.lifecycle == 'A' %}
 <a href="/auction/{{ post.id }}/"><h2>{{ post.title }}</h2></a>
 <p>{{ post.description }}</p>
-<font size="1">{% trans "Minimun price: " %} {{ post.min_price }} €<br>
-{% trans "Deadline: " %} {{ post.deadline }}<br>
-{% trans "Seller: " %} {{ post.seller.username }}<br></font>
+<font size="1">{% trans "Base price: " %} {{ post.base_price }} €<br>
+End time: {{ post.end_time }}<br>
+Seller: {{ post.seller.username }}<br></font>
 
-{% comment %}    <form action="/editauction/{{ post.id }}/" method="post">
-        {% csrf_token %}
-        <input type="submit" value={% trans "Edit" %}>
-    </form>{% endcomment %}
-{% endif %}
 {%  endfor %}
 {% endblock %}
