@@ -8,7 +8,8 @@ from .serializers import AuctionSerializer, BidSerializer, UserSerializer
 from rest_framework.views import APIView
 from rest_framework import generics, filters
 from .models import User, auction, bid
-
+from .services import get_users, get_auctions
+from django.http.response import JsonResponse, HttpResponse
 
 def home(request):
     posts = auction.objects.all()
@@ -153,3 +154,16 @@ class UserList(generics.ListAPIView):
 class BidList(generics.ListAPIView):
     queryset = bid.objects.all()
     serializer_class = BidSerializer
+
+
+class AuctionDetail(APIView):
+    def get(self, request, id):
+        specfic_product = auction.objects.filter(seller_id=id)
+        data = AuctionSerializer(specfic_product, many=True)
+        return JsonResponse(data.data, safe=False)
+
+
+def auctionPage(request, id=None):
+    if request.method == 'GET':
+        auctions_list = get_auctions(id)
+        return render(request, 'home.html', {'auctions_list': auctions_list})
