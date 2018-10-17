@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="88753972-b0eb-4545-a16d-fb9fe05d0874" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
+||||||| merged common ancestors
+    <list default="true" id="88753972-b0eb-4545-a16d-fb9fe05d0874" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="88753972-b0eb-4545-a16d-fb9fe05d0874" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auc/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/auc/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/templates/add_auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/add_auction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+    </list>
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,31 +61,34 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gitignore" value="1" />
-          <entry key="html" value="1" />
-          <entry key="py" value="7" />
+          <entry key="gitignore" value="2" />
+          <entry key="html" value="10" />
+          <entry key="py" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="1" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="7" />
+          <entry key="HTML" value="10" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="537" />
+          <entry key="html" value="342" />
+          <entry key="py" value="744" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="537" />
+          <entry key="HTML" value="342" />
+          <entry key="Python" value="744" />
         </counts>
       </usages-collector>
     </session>
@@ -132,29 +148,101 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/auction/templates/add_auction.html">
+||||||| merged common ancestors
+        <entry file="file://$PROJECT_DIR$/auction/models.py">
+=======
+        <entry file="file://$PROJECT_DIR$/auction/services.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+            <state relative-caret-position="286">
+              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/auction/forms.py">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="19" column="85" selection-start-line="19" selection-start-column="85" selection-end-line="19" selection-end-column="85" />
+<<<<<<< HEAD
+            <state relative-caret-position="185">
+              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+||||||| merged common ancestors
+            <state relative-caret-position="54">
+              <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+=======
+            <state relative-caret-position="66">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
+                <marker date="1539755858428" expanded="true" signature="291:594" ph="..." />
+              </folding>
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/auction/forms.py">
+||||||| merged common ancestors
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/auction/views.py">
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/auc/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="31" column="37" lean-forward="true" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
+              <folding>
+                <element signature="e#627#659#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/auction/templates/login.html">
+        <entry file="file://$PROJECT_DIR$/auction/views.py">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="246">
+              <caret line="19" column="85" selection-start-line="19" selection-start-column="85" selection-end-line="19" selection-end-column="85" />
+||||||| merged common ancestors
+            <state relative-caret-position="340">
+              <caret line="167" column="40" selection-start-line="167" selection-start-column="40" selection-end-line="167" selection-end-column="40" />
+=======
+            <state relative-caret-position="1272">
+              <caret line="193" column="76" selection-start-line="193" selection-start-column="76" selection-end-line="193" selection-end-column="76" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
+              <folding>
+<<<<<<< HEAD
+                <element signature="e#0#24#0" expanded="true" />
+||||||| merged common ancestors
+                <element signature="e#0#35#0" expanded="true" />
+                <marker date="1539678938908" expanded="true" signature="6790:6791" ph="..." />
+=======
+                <element signature="e#0#35#0" expanded="true" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/auction/templates/login.html">
+||||||| merged common ancestors
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+=======
+        <entry file="file://$PROJECT_DIR$/auction/templates/auction.html">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="342">
               <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
             </state>
@@ -166,33 +254,66 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
               <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+||||||| merged common ancestors
+            <state relative-caret-position="528">
+              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+=======
+            <state relative-caret-position="1122">
+              <caret line="51" column="38" lean-forward="true" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/auc/settings.py">
+        <entry file="file://$PROJECT_DIR$/auction/templates/add_auction.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="420">
               <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+||||||| merged common ancestors
+            <state relative-caret-position="-1456">
+              <caret line="39" column="33" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
+=======
+            <state relative-caret-position="528">
+              <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/auction/templates/home.html">
+||||||| merged common ancestors
+        <entry file="file://$PROJECT_DIR$/auc/urls.py">
+=======
+        <entry file="file://$PROJECT_DIR$/auction/templates/base.html">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="171">
               <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
               <folding>
                 <element signature="e#944#984#0#HTML" expanded="true" />
                 <element signature="e#1961#1980#0#HTML" expanded="true" />
               </folding>
+||||||| merged common ancestors
+            <state relative-caret-position="384">
+              <caret line="38" column="63" lean-forward="true" selection-start-line="38" selection-start-column="63" selection-end-line="38" selection-end-column="63" />
+              <folding>
+                <element signature="e#627#659#0" expanded="true" />
+              </folding>
+=======
+            <state relative-caret-position="-421">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="266">
@@ -203,27 +324,74 @@
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
+||||||| merged common ancestors
+        <entry file="file://$PROJECT_DIR$/auction/templates/home.html">
+=======
+        <entry file="file://$PROJECT_DIR$/auc/settings.py">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="285">
               <caret line="30" selection-start-line="30" selection-end-line="30" />
+||||||| merged common ancestors
+            <state relative-caret-position="352">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+=======
+            <state relative-caret-position="550">
+              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/auction/static/main.css">
+||||||| merged common ancestors
+        <entry file="file://$PROJECT_DIR$/auction/serializers.py">
+=======
+        <entry file="file://$PROJECT_DIR$/auction/models.py">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="451">
               <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+||||||| merged common ancestors
+            <state relative-caret-position="-12">
+              <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+=======
+            <state relative-caret-position="616">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/auction/templates/base.html">
+||||||| merged common ancestors
+        <entry file="file://$PROJECT_DIR$/auction/services.py">
+=======
+        <entry file="file://$PROJECT_DIR$/auction/admin.py">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="77">
               <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+||||||| merged common ancestors
+            <state relative-caret-position="484">
+              <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+=======
+            <state relative-caret-position="66">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
             </state>
           </provider>
         </entry>
@@ -234,8 +402,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+<<<<<<< HEAD
         <option value="CSS File" />
         <option value="JavaScript File" />
+||||||| merged common ancestors
+=======
+        <option value="HTML File" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
       </list>
     </option>
   </component>
@@ -249,7 +422,11 @@
         <option value="$PROJECT_DIR$/auction/serializers.py" />
         <option value="$PROJECT_DIR$/auction/services.py" />
         <option value="$PROJECT_DIR$/auc/urls.py" />
+        <option value="$PROJECT_DIR$/auction/templates/404.html" />
+        <option value="$PROJECT_DIR$/auction/templates/500.html" />
+        <option value="$PROJECT_DIR$/auction/templates/home.html" />
         <option value="$PROJECT_DIR$/auction/views.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/auction/templates/confirm_auction.html" />
         <option value="$PROJECT_DIR$/auction/static/main.js" />
         <option value="$PROJECT_DIR$/auction/templates/home.html" />
@@ -263,6 +440,14 @@
         <option value="$PROJECT_DIR$/auction/templates/base.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
+||||||| merged common ancestors
+=======
+        <option value="$PROJECT_DIR$/auction/templates/auction.html" />
+        <option value="$PROJECT_DIR$/auction/templates/base.html" />
+        <option value="$PROJECT_DIR$/auc/settings.py" />
+        <option value="$PROJECT_DIR$/auction/forms.py" />
+        <option value="$PROJECT_DIR$/auction/templates/add_auction.html" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
       </list>
     </option>
   </component>
@@ -273,7 +458,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
+    <option name="x" value="993" />
     <option name="y" value="25" />
     <option name="width" value="927" />
     <option name="height" value="1055" />
@@ -284,7 +469,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -324,10 +508,16 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="DatabaseDriversLRU" value="sqlite" />
+||||||| merged common ancestors
+=======
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -427,7 +617,14 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22634201" />
+||||||| merged common ancestors
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.105146654" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10625346" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -437,6 +634,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
@@ -444,11 +642,28 @@
       <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.33081082" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" visible="true" weight="0.32972974" />
+||||||| merged common ancestors
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" />
+=======
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5008301" side_tool="true" weight="0.33073497" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4991699" visible="true" weight="0.33073497" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+<<<<<<< HEAD
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" weight="0.5618615" />
+||||||| merged common ancestors
+=======
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22634201" />
@@ -482,27 +697,67 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/auction/models.py">
+||||||| merged common ancestors
+    <entry file="file://$PROJECT_DIR$/auction/templates/home.html">
+=======
+    <entry file="file://$PROJECT_DIR$/auction/serializers.py">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="304">
           <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+||||||| merged common ancestors
+        <state relative-caret-position="352">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+=======
+        <state relative-caret-position="-12">
+          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/auc/urls.py">
+||||||| merged common ancestors
+    <entry file="file://$PROJECT_DIR$/auc/settings.py">
+=======
+    <entry file="file://$PROJECT_DIR$/auction/templates/500.html">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="494">
           <caret line="33" column="63" selection-start-line="33" selection-start-column="63" selection-end-line="33" selection-end-column="63" />
+||||||| merged common ancestors
+        <state relative-caret-position="-1456">
+          <caret line="39" column="33" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
+=======
+        <state relative-caret-position="220">
+          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="7" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/auction/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="247">
           <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+||||||| merged common ancestors
+        <state relative-caret-position="528">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+=======
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/auction/services.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -511,12 +766,28 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/auction/views.py">
+||||||| merged common ancestors
+    <entry file="file://$PROJECT_DIR$/auction/serializers.py">
+=======
+    <entry file="file://$PROJECT_DIR$/auction/templates/404.html">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="2375">
           <caret line="167" column="40" selection-start-line="167" selection-start-column="40" selection-end-line="167" selection-end-column="40" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+||||||| merged common ancestors
+        <state relative-caret-position="-12">
+          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="132">
+          <caret line="6" column="6" selection-end-line="10" selection-end-column="7" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
         </state>
       </provider>
     </entry>
@@ -539,20 +810,93 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/auction/templates/confirm_auction.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="266">
           <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+||||||| merged common ancestors
+        <state relative-caret-position="484">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+=======
+        <state relative-caret-position="286">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/templates/confirm_auction.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/auction/templates/auction.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="228">
           <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+||||||| merged common ancestors
+        <state relative-caret-position="384">
+          <caret line="38" column="63" lean-forward="true" selection-start-line="38" selection-start-column="63" selection-end-line="38" selection-end-column="63" />
+          <folding>
+            <element signature="e#627#659#0" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="76">
+          <caret line="31" column="37" lean-forward="true" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
+          <folding>
+            <element signature="e#627#659#0" expanded="true" />
+          </folding>
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/auction/static/main.css">
+||||||| merged common ancestors
+    <entry file="file://$PROJECT_DIR$/auction/models.py">
+=======
+    <entry file="file://$PROJECT_DIR$/auction/templates/product_added.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-421">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1272">
+          <caret line="193" column="76" selection-start-line="193" selection-start-column="76" selection-end-line="193" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auc/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/models.py">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="451">
           <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
         </state>
@@ -590,14 +934,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
           <caret line="19" column="85" selection-start-line="19" selection-start-column="85" selection-end-line="19" selection-end-column="85" />
+||||||| merged common ancestors
+        <state relative-caret-position="54">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+=======
+        <state relative-caret-position="616">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/auction/templates/base.html">
+||||||| merged common ancestors
+    <entry file="file://$PROJECT_DIR$/auction/views.py">
+=======
+    <entry file="file://$PROJECT_DIR$/auction/templates/auction.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="51" column="38" lean-forward="true" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/templates/add_auction.html">
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="77">
           <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
         </state>
@@ -607,9 +972,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+||||||| merged common ancestors
+        <state relative-caret-position="340">
+          <caret line="167" column="40" selection-start-line="167" selection-start-column="40" selection-end-line="167" selection-end-column="40" />
+=======
+        <state relative-caret-position="528">
+          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           <folding>
+<<<<<<< HEAD
             <element signature="e#944#984#0#HTML" expanded="true" />
             <element signature="e#1961#1980#0#HTML" expanded="true" />
+||||||| merged common ancestors
+            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1539678938908" expanded="true" signature="6790:6791" ph="..." />
+=======
+            <element signature="e#0#24#0" expanded="true" />
+            <marker date="1539755858428" expanded="true" signature="291:594" ph="..." />
+>>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
           </folding>
         </state>
       </provider>

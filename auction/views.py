@@ -10,43 +10,12 @@ from .models import User, auction, bid
 from .services import get_users, get_auctions
 from django.http.response import JsonResponse
 import pytz
-from django.core.files import File
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
+
 def home(request):
-    #changing status and is_winning
-    auctions = auction.objects.all()
-    current_time = datetime.now(pytz.timezone('Asia/Kolkata'))
-    for auc in auctions:
-        if auc.start_time > current_time:
-            auc.status = 'U'
-            auc.save()
-        if (auc.end_time > current_time) and (auc.start_time < current_time) and auc.status != 'A':
-            auc.status = 'A'
-            auc.save()
-        if (auc.end_time < current_time) and auc.status == 'A':
-            auc.is_winning = 'F'
-            auc.save()
-
-    bids = bid.objects.all()
-    for b in bids:
-        for a in bids:
-            if (b.auctioneer == a.auctioneer and a != b):
-                if (b.is_winning == True and a.is_winning == True):
-                    if (b.amount > a.amount):
-                        a.is_winning = False
-                        a.save()
-                    else:
-                        b.is_winning = False
-                        b.save()
-        if (b.amount < b.auctioneer.base_price):
-            b.amount = b.auctioneer.base_price + 1
-            b.save()
-        if (b.user == b.auctioneer.seller):
-            b.delete()
-
-
+    background_jobs()
     posts = auction.objects.all()
     return render(request, "home.html", {'posts': posts})
 
@@ -152,6 +121,8 @@ def bid_auction(request, id):
             amount = request.POST['am']
             auctions = auction.objects.filter(id=id)
             if auctions:
+                # auctions = get_auctions(id)
+                # print(auctions)
                 auctions = auction.objects.get(id=id)
             else:
                 msg = "Auction not found"
@@ -239,6 +210,39 @@ def view_auction(request, id):
         posts = auction.objects.all()
         return render(request, "home.html", {'msg': message, 'posts': posts})
 
+
+def background_jobs():
+    #changing status and is_winning
+    auctions = auction.objects.all()
+    current_time = datetime.now(pytz.timezone('Asia/Kolkata'))
+    for auc in auctions:
+        if auc.start_time > current_time:
+            auc.status = 'U'
+            auc.save()
+        if (auc.end_time > current_time) and (auc.start_time < current_time) and auc.status != 'A':
+            auc.status = 'A'
+            auc.save()
+        if (auc.end_time < current_time) and auc.status == 'A':
+            auc.is_winning = 'F'
+            auc.save()
+
+    bids = bid.objects.all()
+    for b in bids:
+        for a in bids:
+            if (b.auctioneer == a.auctioneer and a != b):
+                if (b.is_winning == True and a.is_winning == True):
+                    if (b.amount > a.amount):
+                        a.is_winning = False
+                        a.save()
+                    else:
+                        b.is_winning = False
+                        b.save()
+        if (b.amount < b.auctioneer.base_price):
+            b.amount = b.auctioneer.base_price + 1
+            b.save()
+        if (b.user == b.auctioneer.seller):
+            b.delete()
+
 class AuctionList(generics.ListAPIView):
     queryset = auction.objects.all()
     serializer_class = AuctionSerializer
@@ -256,7 +260,7 @@ class BidList(generics.ListAPIView):
 
 class AuctionDetail(APIView):
     def get(self, request, id):
-        specfic_product = auction.objects.filter(seller_id=id)
+        specfic_product = auction.objects.filter(id=id)
         data = AuctionSerializer(specfic_product, many=True)
         return JsonResponse(data.data, safe=False)
 
