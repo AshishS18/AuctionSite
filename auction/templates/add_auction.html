@@ -1,20 +1,22 @@
 {% extends "base.html" %}
-
-<h2>Add Auction</h2>
+{% load crispy_forms_tags %}
 
 {% block content %}
        <strong>{{ msg }}</strong>
-
-<p><b>Add Auction</b></p>
-  {% if error%}
-  <p> <b>{{ error }}</b> </p>
+<div class="container p-3 my-3">
+    <h3>Add Auction</h3>
+    {% if error%}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
     {% endif %}
 
-    <form action="/addauction/" method="post", enctype="multipart/form-data">
-        {% csrf_token %}
-         {{ form.as_p }}
-        <input type="submit" value="Submit">
+    <form action="/addauction/" class="text-justify" method="post">
+        {% crispy form %}
+        <input class="btn btn-success" type="submit" value="Submit">
     </form>
+</div>
+
 <script>
        $(function () {
        $('.datetime-input').datetimepicker({

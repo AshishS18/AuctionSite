@@ -1,26 +1,82 @@
 {% extends "base.html" %}
 {% block content %}
-   <strong>{{ msg }}</strong>
-<img src="{{ auctioneer.image.url }}">
-<h2>{{ auctioneer.title }}</h2>
-<h4>{{ auctioneer.description }}</h4>
-<font size="2"><p><b>Base price: {{ auctioneer.base_price }}<br>
-End time: {{ auctioneer.end_time }}<br>
-Seller: {{ auctioneer.seller.username }}<br>
-Status: {{ auctioneer.status }}</b></p></font>
+    <div class="row  text-center">
+        <strong>{{ msg }}</strong>
+    </div>
 
-{% if bb %}<FONT COLOR="#FF0000"><h4>Highest bid: {{ bb.amount }}, user: {{ bb.user }}</h4></FONT>{% endif %}
+    <div class="product-container container">
+        <div class="row py-3 px-3">
+          <h2>{{ auctioneer.title }}</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ auctioneer.image.url }}" class="img-fluid">
+            </div>
+            <div  class="col-md-8 table">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Description</h3>
+                    </div>
+                    <div class="col-6">
+                           <form class="form-inline my-2 my-lg-0 " action="/bidauction/{{ auctioneer.id }}/" method="POST">
+                                {% csrf_token %}
+                                <input class="form-control mr-sm-2"  type="search" title='am' id='am' name='am' placeholder="amount">
+                               <button class="btn bg-pink  my-2 my-sm-0" type="submit">Bid Now</button>
+                            </form>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <tr>
 
-<div style="text-align: left;">
-<h3></h3>
-    <form action="/bidauction/{{ auctioneer.id }}/" method="POST">
-    {% csrf_token %}
-    <input type="search" title='am' id='am' name='am' placeholder="amount">
-    <input type="submit" value="Bid">
-</form>
+                            <h4>{{ auctioneer.description }}</h4>
 
-<h3></h3>
-</div>
+                    </tr>
+                    <tr>
+                        <td>
+                            Base price
+                        </td>
+                        <td>
+                            {{ auctioneer.base_price }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                             Seller
+                        </td>
+                        <td>
+                            {{ auctioneer.seller.username }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                             Status
+                        </td>
+                        <td>
+                            {{ auctioneer.status }}
+                        </td>
+                    </tr>
+
+
+                </table>
+
+            </div>
+            <div class="card shadow-lg  bg-white rounded p-3 my-3">
+                <h3>End time : {{ auctioneer.end_time }} </h3>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{#<div class="container col-5">#}
+{#<div class="row product-container">#}
+
+{#</div>#}
+{#{% if bb %}<div class="card" COLOR="#FF0000"><h4>Highest bid: {{ bb.amount }}, user: {{ bb.user }}</h4></div>{% endif %}#}
+{#</div>#}
+
+
 
 
 {% endblock %}
