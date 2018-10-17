@@ -15,12 +15,17 @@
          {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
-<script>
-       $(function () {
-       $('.datetime-input').datetimepicker({
-           format:'YYYY-MM-DD HH:mm:ss'
-       });
-   });
-</script>
+
+        <div class=" date input-group" id="datetimepicker_id_datetime">
+            <input class=" form-control" id="id_datetime" name="datetime" type="text" required/>
+        </div>
+
+    <script>(function () {
+        $(document).ready(function() {
+        $("#id_datetime").datetimepicker();
+        });
+        })(jQuery);
+    </script>
 {% endblock %}
+
 

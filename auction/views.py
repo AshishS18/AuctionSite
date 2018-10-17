@@ -121,6 +121,8 @@ def bid_auction(request, id):
             amount = request.POST['am']
             auctions = auction.objects.filter(id=id)
             if auctions:
+                # auctions = get_auctions(id)
+                # print(auctions)
                 auctions = auction.objects.get(id=id)
             else:
                 msg = "Auction not found"
@@ -258,7 +260,7 @@ class BidList(generics.ListAPIView):
 
 class AuctionDetail(APIView):
     def get(self, request, id):
-        specfic_product = auction.objects.filter(seller_id=id)
+        specfic_product = auction.objects.filter(id=id)
         data = AuctionSerializer(specfic_product, many=True)
         return JsonResponse(data.data, safe=False)
 
