@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<<<<<<< HEAD
+
     <div class="row  text-center">
         <strong>{{ msg }}</strong>
     </div>
@@ -18,10 +18,10 @@
                     <div class="col-6">
                         <h3>Description</h3>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 card shadow-lg  bg-white rounded p-3 my-3">
                            <form class="form-inline my-2 my-lg-0 " action="/bidauction/{{ auctioneer.id }}/" method="POST">
                                 {% csrf_token %}
-                                <input class="form-control mr-sm-2"  type="search" title='am' id='am' name='am' placeholder="amount">
+                                <input class="form-control mr-auto"  type="search" title='am' id='am' name='am' placeholder=" New Bid Amount">
                                <button class="btn bg-pink  my-2 my-sm-0" type="submit">Bid Now</button>
                             </form>
                     </div>
@@ -56,8 +56,22 @@
                             {{ auctioneer.status }}
                         </td>
                     </tr>
-
-
+                    <tr>
+                        <td>
+                             Highest bid
+                        </td>
+                        <td>
+                             {{ bb.amount }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                             Current Winner
+                        </td>
+                        <td>
+                            {{ bb.user }}
+                        </td>
+                    </tr>
                 </table>
 
             </div>
@@ -78,59 +92,7 @@
 {#</div>#}
 
 
-||||||| merged common ancestors
-   <strong>{{ msg }}</strong>
-<img src="{{ auctioneer.image.url }}">
-<h2>{{ auctioneer.title }}</h2>
-<h4>{{ auctioneer.description }}</h4>
-<font size="2"><p><b>Base price: {{ auctioneer.base_price }}<br>
-End time: {{ auctioneer.end_time }}<br>
-Seller: {{ auctioneer.seller.username }}<br>
-Status: {{ auctioneer.status }}</b></p></font>
 
-{% if bb %}<FONT COLOR="#FF0000"><h4>Highest bid: {{ bb.amount }}, user: {{ bb.user }}</h4></FONT>{% endif %}
-
-<div style="text-align: left;">
-<h3></h3>
-    <form action="/bidauction/{{ auctioneer.id }}/" method="POST">
-    {% csrf_token %}
-    <input type="search" title='am' id='am' name='am' placeholder="amount">
-    <input type="submit" value="Bid">
-</form>
-
-<h3></h3>
-</div>
-=======
-<strong>{{ msg }}</strong>
-
-<p>{{ auctioneer.end_time|date:'Y-m-d'}}{{ auctioneer.end_time|time:"H:i" }}</p>
-
-<img src="{{ auctioneer.image.url }}">
-
-<h2>{{ auctioneer.title }}</h2>
-<h4>{{ auctioneer.description }}</h4>
-<font size="2"><p><b>Base price: {{ auctioneer.base_price }}</b></p>
-    {# <p>{{ auctioneer.end_time}}</p>#}
-    <p id="endtime">{{ auctioneer.end_time|date:'Y-m-d'}} {{ auctioneer.end_time|time:"H:i" }}</p>
-    <p><b>Seller Name: {{ auctioneer.seller.username }}</b></p>
-    <p><b>Status: {{ auctioneer.status }}</b></p>
-</font>
-
-<p id="demo"></p>
-
-{% if bb %}<FONT COLOR="#FF0000"><h4>Highest bid: {{ bb.amount }}, user: {{ bb.user }}</h4></FONT>{% endif %}
-
-
-<div style="text-align: left;">
-    <h3></h3>
-    <form action="/bidauction/{{ auctioneer.id }}/" method="POST">
-        {% csrf_token %}
-        <input type="search" title='am' id='am' name='am' placeholder="amount">
-        <input type="submit" value="Bid">
-
-    </form>
-
-</div>
 <script>
     {#var time = document.getElementById('endtime1').value;#}
     var endtime = document.getElementById("endtime").innerText;
@@ -164,7 +126,6 @@ var x = setInterval(function() {
         document.getElementById("demo").innerHTML = "ITEM EXPIRED";
     }
 }, 1000);
->>>>>>> a05d180f08aa5ffe88a3fc992b030260e2b8cd7b
 
 </script>
 
