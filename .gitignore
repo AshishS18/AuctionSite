@@ -28,6 +28,7 @@
 ######################
 .DS_Store
 ehthumbs.db
+__pycache__
 Icon
 Thumbs.db
 .tmtags

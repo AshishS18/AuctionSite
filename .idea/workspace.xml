@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="88753972-b0eb-4545-a16d-fb9fe05d0874" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/auction/static/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auc/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/auc/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/add_auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/add_auction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/auction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/confirm_auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/confirm_auction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,6 +89,7 @@
         <counts>
           <entry key="auction_auction" value="2" />
           <entry key="css" value="3" />
+          <entry key="gitignore" value="1" />
           <entry key="html" value="12" />
           <entry key="js" value="1" />
           <entry key="py" value="2" />
@@ -114,7 +103,7 @@
           <entry key="Database Element" value="2" />
           <entry key="HTML" value="12" />
           <entry key="JavaScript" value="1" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="PLAIN_TEXT" value="2" />
           <entry key="Python" value="2" />
           <entry key="Scratch" value="2" />
         </counts>
@@ -122,6 +111,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="219" />
+          <entry key="gitignore" value="8" />
           <entry key="html" value="1379" />
           <entry key="py" value="138" />
           <entry key="txt" value="1" />
@@ -131,7 +121,7 @@
         <counts>
           <entry key="CSS" value="219" />
           <entry key="HTML" value="1379" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="PLAIN_TEXT" value="9" />
           <entry key="Python" value="138" />
         </counts>
       </usages-collector>
@@ -181,15 +171,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/auction/templates/auction.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auc/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
@@ -211,11 +192,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="266">
               <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -257,7 +247,6 @@
       <list>
         <option value="$PROJECT_DIR$/auction/models.py" />
         <option value="$PROJECT_DIR$/auction/serializers.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/auction/services.py" />
         <option value="$PROJECT_DIR$/auc/urls.py" />
         <option value="$PROJECT_DIR$/auction/views.py" />
@@ -273,6 +262,7 @@
         <option value="$PROJECT_DIR$/auction/forms.py" />
         <option value="$PROJECT_DIR$/auction/templates/base.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -499,13 +489,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/auc/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -635,6 +618,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>
