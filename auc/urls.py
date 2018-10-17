@@ -1,46 +1,34 @@
-"""auc URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 from auction import views
 from django.views.decorators.csrf import csrf_exempt
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^home/$', views.home, name='home'),
-    url(r'^register/$', views.register, name='register'),
-    url(r'^login/$', views.login_view, name='login'),
-    url(r'^logout/$', views.logout_view, name='logout'),
-    url(r'^addauction/$', views.add_auction, name='addauction'),
-    # url(r'^saveauction/$', views.save_auction, name='saveauction'),
-    url(r'^productadded/$', views.add_auction, name='productadded'),
-    url(r'^auction/(?P<id>\w+)/$', views.view_auction),
-    url(r'^bidauction/(?P<id>\w+)/$', views.bid_auction, name='bidauction'),
+    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('addauction/', views.add_auction, name='addauction'),
+    path('productadded/', views.add_auction, name='productadded'),
+    path('auction/<int:id>/', views.view_auction),
+    path('bidauction/<int:id>/', views.bid_auction, name='bidauction'),
     path('admin/', admin.site.urls),
     path('userlist/', views.UserList.as_view(), name='user_list'),
-
     path('auctionlist/', views.AuctionList.as_view(), name='auction_list'),
     path('auctionlist/<int:id>', views.AuctionDetail.as_view(), name='auction_lists'),
-
     path('bidlist/', views.BidList.as_view(), name='bid_list'),
-
     path('auctions', views.auctionPage, name='auction'),
     path('auctions/<int:id>', views.auctionPage, name='auction'),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

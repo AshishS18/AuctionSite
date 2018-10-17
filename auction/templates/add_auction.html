@@ -10,13 +10,17 @@
   <p> <b>{{ error }}</b> </p>
     {% endif %}
 
-
-
-
-    <form action="/addauction/" method="post">
+    <form action="/addauction/" method="post", enctype="multipart/form-data">
         {% csrf_token %}
          {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
-
+<script>
+       $(function () {
+       $('.datetime-input').datetimepicker({
+           format:'YYYY-MM-DD HH:mm:ss'
+       });
+   });
+</script>
 {% endblock %}
+

@@ -24,6 +24,7 @@ class auction(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=3)
     status = models.CharField(max_length=1, default='A')
+    image = models.FileField(name='image')
 
     def __str__(self):
         return self.title
@@ -35,5 +36,8 @@ class auction(models.Model):
 class bid(models.Model):
     auctioneer = models.ForeignKey(auction, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.FloatField()
+    amount = models.IntegerField()
     is_winning = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.amount
