@@ -10,14 +10,12 @@
   <p> <b>{{ error }}</b> </p>
     {% endif %}
 
-
-
-
-    <form action="/addauction/" method="post">
+    <form action="/addauction/" method="post", enctype="multipart/form-data">
         {% csrf_token %}
          {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
+
         <div class=" date input-group" id="datetimepicker_id_datetime">
             <input class=" form-control" id="id_datetime" name="datetime" type="text" required/>
         </div>
@@ -29,3 +27,5 @@
         })(jQuery);
     </script>
 {% endblock %}
+
+

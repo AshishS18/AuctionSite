@@ -1,16 +1,18 @@
 from django.shortcuts import render
-from .models import auction, bid
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserCreateForm, createAuction, confAuction
-from datetime import datetime, timezone
+from .forms import UserCreateForm, createAuction
+from datetime import datetime
 import dateutil.parser
 from .serializers import AuctionSerializer, BidSerializer, UserSerializer
 from rest_framework.views import APIView
-from rest_framework import generics, filters
+from rest_framework import generics
 from .models import User, auction, bid
 from .services import get_users, get_auctions
-from django.http.response import JsonResponse, HttpResponse
+from django.http.response import JsonResponse
 import pytz
+from django.core.files import File
+
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 
 def home(request):
@@ -111,20 +113,21 @@ def add_auction(request):
             return render(request, 'add_auction.html', {'form': form})
 
         else:
-            form = createAuction(request.POST)
+            form = createAuction(request.POST, request.FILES)
             if form.is_valid():
+                product = form.save(commit=False)
+                product.seller = request.user
+                product.image = request.FILES['image']
+                file_type = product.image.url.split('.')[-1]
+                file_type = file_type.lower()
+                if file_type not in IMAGE_FILE_TYPES:
+                    message = "This filetype is not supported."
+                    form = createAuction()
+                    return render(request, 'add_auction.html', {'msg': message, 'form': form})
+                product.save()
+
                 cd = form.cleaned_data
-                title = cd['title']
-                description = cd['description']
                 end_time = cd['end_time']
-                base_price = cd['base_price']
-                start_time = cd['start_time']
-                location = cd['location']
-                seller = request.user
-                a = auction(title=title, description=description, end_time=end_time,
-                            base_price=base_price, seller=seller, start_time=start_time,
-                            location=location)
-                a.save()
                 d = end_time
                 if (d - datetime.now(pytz.timezone('Asia/Kolkata'))).total_seconds() < 86400:
                     print('hitted')
@@ -132,8 +135,6 @@ def add_auction(request):
                     form = createAuction()
                     return render(request, 'add_auction.html', {'msg': message, 'form': form})
 
-                # form = confAuction()
-                # return render(request, 'confirm_auction.html', {'form': form, "title": title, "description": description, "end_time": end_time, "base_price": base_price, "start_time": start_time, "location": location})
                 message = "New auction has been saved"
                 return render(request, 'product_added.html', {'message': message})
             else:
@@ -144,32 +145,6 @@ def add_auction(request):
         message = "You have to log in first"
         posts = auction.objects.all()
         return render(request, "home.html", {'msg': message, 'posts': posts})
-
-
-# def save_auction(request):
-#     if request.user.is_authenticated:
-#         option = request.POST.get('option', '')
-#         if option == 'Yes':
-#             new_title = request.POST['title']
-#             new_description = request.POST['description']
-#             new_end_time = dateutil.parser.parse(request.POST.get('end_time'))
-#             new_base_price = request.POST['base_price']
-#             new_seller = request.user
-#             new_start_time = dateutil.parser.parse(request.POST.get('start_time'))
-#             new_location = request.POST.get('location')
-#             a = auction(title=new_title, description=new_description, end_time=new_end_time, base_price=new_base_price, seller=new_seller, start_time=new_start_time, location=new_location)
-#             a.save()
-#             # send_mail('New auction created.', "Your new auction has been created successfully.", 'no_repli@yaas.com', [request.user.email,], fail_silently=False)
-#             message = "New auction has been saved and a confirmation email has been sent to your email."
-#             return render('product_added.html', {'message' : message})
-#         else:
-#             error = "Auction is not saved"
-#             form = createAuction()
-#             return render('add_auction.html', {'form' : form, 'error' : error})
-#     else:
-#         message = "You have to log in first"
-#         posts = auction.objects.all()
-#         return render("home.html", {'msg': message, 'posts': posts})
 
 
 def bid_auction(request, id):
@@ -195,26 +170,26 @@ def bid_auction(request, id):
                 msg = "Amount have to be at least 1 greater than minimum price."
                 return render(request, "auction.html", {'auctioneer':auctions, 'msg': msg})
 
-            prev_bid_wining = bid.objects.filter(is_winning=True, auctioneer=auctions)
-            if prev_bid_wining:
-                prev_bid_wining = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
+            prev_bid_winning = bid.objects.filter(is_winning=True, auctioneer=auctions)
+            if prev_bid_winning:
+                prev_bid_winning = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
 
-            if prev_bid_wining:
-                if prev_bid_wining.user == request.user:
+            if prev_bid_winning:
+                if prev_bid_winning.user == request.user:
                     msg = "You are already wining this auction."
-                    return render(request, "auction.html", {'auctioneer':auctions,'bb':prev_bid_wining, 'msg': msg})
+                    return render(request, "auction.html", {'auctioneer':auctions,'bb':prev_bid_winning, 'msg': msg})
 
-                if float(amount) - prev_bid_wining.amount < 1:
+                if float(amount) - prev_bid_winning.amount < 1:
                     msg = "Bid has to be at atleast 1 greater than previous bids."
-                    return render("auction.html", {'auctioneer':auctions,'bb':prev_bid_wining, 'msg': msg})
+                    return render("auction.html", {'auctioneer':auctions,'bb':prev_bid_winning, 'msg': msg})
 
-                prev_bid_wining.is_winning = False
-                prev_bid_wining.save()
+                prev_bid_winning.is_winning = False
+                prev_bid_winning.save()
 
             b = bid(user=request.user, amount=amount, auctioneer=auctions, is_winning=True)
             b.save()
 
-            msg = "Bid saved sucesfully."
+            msg = "Bid saved succesfully."
             return render(request, "auction.html", {'auctioneer':auctions,'bb':b, 'msg': msg})
 
         else:

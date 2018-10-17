@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
    <strong>{{ msg }}</strong>
+
     <p>{{ auctioneer.end_time|date:'Y-m-d'}}{{ auctioneer.end_time|time:"H:i" }}</p>
+
+<img src="{{ auctioneer.image.url }}">
+
 <h2>{{ auctioneer.title }}</h2>
 <h4>{{ auctioneer.description }}</h4>
     <font size="2"><p><b>Base price: {{ auctioneer.base_price }}</b></p>
@@ -12,7 +16,9 @@
 </font>
 
  <p id="demo"></p>
-{% if bb %}<FONT COLOR="#FF0000"><h4>Actual bid: {{ bb.amount }}, user: {{ bb.user }}</h4></FONT>{% endif %}
+
+{% if bb %}<FONT COLOR="#FF0000"><h4>Highest bid: {{ bb.amount }}, user: {{ bb.user }}</h4></FONT>{% endif %}
+
 
 <div style="text-align: left;">
 <h3></h3>
