@@ -1,31 +1,39 @@
 {% extends "base.html" %}
 
 <h2>Add Auction</h2>
-
 {% block content %}
-       <strong>{{ msg }}</strong>
+    <strong>{{ msg }}</strong>
 
-<p><b>Add Auction</b></p>
-  {% if error%}
-  <p> <b>{{ error }}</b> </p>
+    <p><b>Add Auction</b></p>
+    {% if error %}
+        <p><b>{{ error }}</b></p>
     {% endif %}
 
-    <form action="/addauction/" method="post", enctype="multipart/form-data">
+    <form action="/addauction/" method="post" , enctype="multipart/form-data">
         {% csrf_token %}
-         {{ form.as_p }}
+        {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
 
-        <div class=" date input-group" id="datetimepicker_id_datetime">
-            <input class=" form-control" id="id_datetime" name="datetime" type="text" required/>
-        </div>
 
-    <script>(function () {
-        $(document).ready(function() {
-        $("#id_datetime").datetimepicker();
+    <script>
+        $(function () {
+            $('.datetimepicker1').datetimepicker({
+                format:'YYYY-MM-DD HH:mm:ss'
+            });
+
         });
-        })(jQuery);
     </script>
+
+{#    <script>#}
+{#        $(function () {#}
+{#            $('.datetime-input').datetimepicker({#}
+{#                format:'YYYY-MM-DD HH:mm:ss'#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+
+
 {% endblock %}
 
 
