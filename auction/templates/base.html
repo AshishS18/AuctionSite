@@ -1,5 +1,5 @@
 <html>
-<style type= "text/css">
+<style type="text/css">
     body {color: #1C1C1C; background: #D8D8D8; padding: 0 5em; margin:0}
     h1 {color: #D4F3B6; padding: 2em 1em; background: #424242}
     h2 {color: #000000; margin-top: 1em}
@@ -7,40 +7,42 @@
     p {margin: 1em 0}
     .boton { float:left; }
 
+
 </style>
 <body>
-<h1><a href="/home/" style="text-decoration: none; color: #D4F3B6">BBG: BidBidGo</a>
+<h1><a href="/home/" style="text-decoration: none; color: #D4F3B6">BidBidGo</a>
 </h1>
 
 <div style="text-align: left;">
-<h3></h3>
-<form action="/home/">
-    <input class="boton" type="submit" value="Home"}>
-</form>
-<form action="/login/">
-    <input class="boton" type="submit" value="Login">
-</form>
-<form action="/logout/">
-    <input class="boton" type="submit" value="Logout">
-</form>
-<form action="/register/">
-    <input class="boton" type="submit" value="Register">
-</form>
-<form action="/addauction/">
-    <input class="boton" type="submit" value="AddAuction">
-</form>
+    <h3></h3>
+    <form action="/home/">
+        <input class="boton" type="submit" value="Home" }>
+    </form>
+    <form action="/login/">
+        <input class="boton" type="submit" value="Login">
+    </form>
+    <form action="/logout/">
+        <input class="boton" type="submit" value="Logout">
+    </form>
+    <form action="/register/">
+        <input class="boton" type="submit" value="Register">
+    </form>
+    <form action="/addauction/">
+        <input class="boton" type="submit" value="AddAuction">
+    </form>
 
 </div>
 
 <h3></h3>
 <div style="text-align: right;">
 
-<form action="/search/" method="POST">
+    <form action="/search/" method="POST">
         {% csrf_token %}
 
-    <input type="search" name='tit' title="tit" placeholder="title...">
-    <input type="submit" value="Search">
-</form></div>
+        <input type="search" name='tit' title="tit" placeholder="title...">
+        <input type="submit" value="Search">
+    </form>
+</div>
 
 
 {% block content %}
