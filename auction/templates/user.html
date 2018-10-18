@@ -131,13 +131,8 @@
                             tr_node.appendChild(td_node_baseprice);
                             tr_node.appendChild(td_node_amount);
                             tr_node.appendChild(td_node_iswinning);
-
                             document.getElementById('add_bid_in_table').appendChild(tr_node);
-                            var textnode = document.createTextNode(biddata[i].amount);
 
-                            var b = document.createElement("br");
-                            node.appendChild(textnode)
-                            node.appendChild(b)
                         }
                     }
                     document.getElementById('added_bids').appendChild(node);
