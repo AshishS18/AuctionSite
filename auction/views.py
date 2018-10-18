@@ -15,7 +15,35 @@ IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 
 def home(request):
-    background_jobs()
+    # background_jobs()
+    # changing status and is_winning
+    auctions = auction.objects.all()
+    for auc in auctions:
+        if auc.start_time > datetime.now(pytz.timezone('Asia/Kolkata')):
+            auc.status = 'U'
+        if (auc.end_time > datetime.now(pytz.timezone('Asia/Kolkata'))) and (auc.start_time < datetime.now(pytz.timezone('Asia/Kolkata'))) and auc.status != 'A':
+            auc.status = 'A'
+        if (auc.end_time < datetime.now(pytz.timezone('Asia/Kolkata'))) and auc.status != 'F':
+            auc.status = 'F'
+        auc.save()
+
+    bids = bid.objects.all()
+    for b in bids:
+        for a in bids:
+            if (b.auctioneer == a.auctioneer and a != b):
+                if (b.is_winning == True and a.is_winning == True):
+                    if (b.amount > a.amount):
+                        a.is_winning = False
+                        a.save()
+                    else:
+                        b.is_winning = False
+                        b.save()
+        if (b.amount < b.auctioneer.base_price):
+            b.amount = b.auctioneer.base_price + 1
+            b.save()
+        if (b.user == b.auctioneer.seller):
+            b.delete()
+
     posts = auction.objects.all()
     return render(request, "home.html", {'posts': posts})
 
@@ -52,10 +80,9 @@ def register(request):
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
-
+            form.save()
             posts = auction.objects.all()
-            message = "New User is created. Please Login"
+            message = "New User is created."
             return render(request, "home.html", {'msg': message, 'posts': posts})
     else:
         form = UserCreateForm(request.POST)
@@ -97,10 +124,14 @@ def add_auction(request):
 
                 cd = form.cleaned_data
                 end_time = cd['end_time']
-                d = end_time
-                if (d - datetime.now(pytz.timezone('Asia/Kolkata'))).total_seconds() < 86400:
-                    print('hitted')
+                start_time = cd['start_time']
+                if (end_time - datetime.now(pytz.timezone('Asia/Kolkata'))).total_seconds() < 86400:
                     message = "The minimum duration of an auction is 24hours. You have to change the end time."
+                    form = createAuction()
+                    return render(request, 'add_auction.html', {'msg': message, 'form': form})
+
+                if (start_time < datetime.now(pytz.timezone('Asia/Kolkata'))):
+                    message = "The auction should start after creation."
                     form = createAuction()
                     return render(request, 'add_auction.html', {'msg': message, 'form': form})
 
@@ -215,37 +246,7 @@ def view_auction(request, id):
         return render(request, "home.html", {'msg': message, 'posts': posts})
 
 
-def background_jobs():
-    # changing status and is_winning
-    auctions = auction.objects.all()
-    current_time = datetime.now(pytz.timezone('Asia/Kolkata'))
-    for auc in auctions:
-        if auc.start_time > current_time:
-            auc.status = 'U'
-            auc.save()
-        if (auc.end_time > current_time) and (auc.start_time < current_time) and auc.status != 'A':
-            auc.status = 'A'
-            auc.save()
-        if (auc.end_time < current_time) and auc.status == 'A':
-            auc.is_winning = 'F'
-            auc.save()
-
-    bids = bid.objects.all()
-    for b in bids:
-        for a in bids:
-            if (b.auctioneer == a.auctioneer and a != b):
-                if (b.is_winning == True and a.is_winning == True):
-                    if (b.amount > a.amount):
-                        a.is_winning = False
-                        a.save()
-                    else:
-                        b.is_winning = False
-                        b.save()
-        if (b.amount < b.auctioneer.base_price):
-            b.amount = b.auctioneer.base_price + 1
-            b.save()
-        if (b.user == b.auctioneer.seller):
-            b.delete()
+# def background_jobs():
 
 
 def user_page(request):
