@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+    <p id="user_name"></p>
+    <p id="user_email"></p>
+    <h3>Your added Auctions</h3>
+    <p id="added_auction"></p>
+    <h3>Your added Bids</h3>
+    <p id="added_bids"></p>
+    <script>
+        {#setInterval(receive, 1000);#}
+
+        function user_detail() {
+            $.get('http://127.0.0.1:8000/userlist/' +{{ user_id }}, function (user_data) {
+                    if (user_data.length !== 0) {
+                        document.getElementById("user_name").innerHTML = user_data.username;
+                        document.getElementById("user_email").innerHTML = user_data.email;
+
+                    }
+                }
+            )
+
+        }
+
+
+        function user_auction() {
+            $.get('http://127.0.0.1:8000/auctionlist/', function (auctiondata) {
+                    if (auctiondata.length !== 0) {
+                        var node = document.createElement("span");
+                        for (i = 0; i < auctiondata.length; i++) {
+                            if (auctiondata[i].seller_id == {{ user_id }}) {
+                                var textnode = document.createTextNode(auctiondata[i].location + " : " + auctiondata[i].description + " : " + auctiondata[i].start_time + " : " + auctiondata[i].end_time + " : " + auctiondata[i].base_price + " : " + auctiondata[i].title)
+                                var b = document.createElement("br");
+                                node.appendChild(textnode)
+                                node.appendChild(b)
+                            }
+                        }
+                        document.getElementById('added_auction').appendChild(node);
+                    }
+                }
+            )
+
+        }
+
+        function user_bid() {
+            $.get('http://127.0.0.1:8000/bidlist/', function (biddata) {
+                    if (biddata.length !== 0) {
+                        var node = document.createElement("span");
+
+                        for (i = 0; i < biddata.length; i++) {
+                            if (biddata[i].user == {{ user_id }}) {
+
+                                auction_id = (biddata[i].auctioneer);
+                                $.get('http://127.0.0.1:8000/auctionlist/'+auction_id, function (bid_product) {
+                                        if (bid_product.length !== 0) {
+                                            var product_node = document.createTextNode('title : '+bid_product.title+'description : '+bid_product.description + 'start_time : '+ bid_product.start_time+'end_time : '+ bid_product.end_time+ 'base_price : '+bid_product.base_price);
+                                            var b = document.createElement("br");
+                                            node.appendChild(product_node);
+                                             node.appendChild(b);
+                                            console.log(bid_product);
+                                        }
+                                    }
+                                )
+                                var textnode = document.createTextNode(biddata[i].amount);
+                                var b = document.createElement("br");
+                                node.appendChild(textnode)
+                                node.appendChild(b)
+                            }
+                        }
+                        document.getElementById('added_bids').appendChild(node);
+
+
+                    }
+
+
+                }
+            )
+
+
+        }
+
+        window.onload = user_detail();
+        window.onload = user_auction();
+        window.onload = user_bid();
+    </script>
+{% endblock %}
+
