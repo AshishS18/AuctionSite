@@ -1,12 +1,33 @@
 {% load static %}
 <html>
+
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 <link rel="stylesheet" href="../static/main.css">
 
 </head>
+<style type= "text/css">
+    body {color: #1C1C1C; background: #D8D8D8; padding: 0 5em; margin:0}
+    h1 {color: #D4F3B6; padding: 2em 1em; background: #424242}
+    h2 {color: #000000; margin-top: 1em}
+    h3 {border-top: 2px solid #000000; margin-top: 1em}
+    p {margin: 1em 0}
+    .boton { float:left; }
+
+</style>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+</head>
+
 <body>
+<<<<<<< HEAD
   <nav class="navbar">
         <a class="navbar-brand  text-light" href="{% url 'home' %}">BidBidGo</a>
   <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +63,8 @@
   </div>
 
 </nav>
+
+
 
 {% block content %}
 {% endblock %}
