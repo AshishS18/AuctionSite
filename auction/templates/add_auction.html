@@ -3,6 +3,7 @@
 <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
+
 <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
@@ -11,7 +12,11 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
+
+<h2>Add Auction</h2>
+
 {% block content %}
+
        <strong>{{ msg }}</strong>
 <div class="container p-3 my-3">
     <h3>Add Auction</h3>
@@ -19,7 +24,10 @@
       <div class="alert alert-danger">
         {{ error }}
       </div>
+       <strong>{{ msg }}</strong>
+
     {% endif %}
+
 
     <form action="/addauction/" class="text-justify" method="post">
         {% crispy form %}
@@ -47,6 +55,17 @@
         <!--});-->
         <!--})(jQuery);-->
     <!--</script>-->
+
+
+    <script>
+        $(function () {
+            $('.datetimepicker1').datetimepicker({
+                format:'YYYY-MM-DD HH:mm:ss'
+            });
+
+        });
+    </script>
+
 {% endblock %}
 
 
