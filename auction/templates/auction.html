@@ -1,4 +1,4 @@
-% extends "base.html" %}
+{% extends "base.html" %}
 {% block content %}
 <strong>{{ msg }}</strong>
 
@@ -10,10 +10,10 @@
 <h4>{{ auctioneer.description }}</h4>
    <p>hello</p>
 <font size="2"><p><b>Base price: {{ auctioneer.base_price }}</b></p>
-   {# <p>{{ auctioneer.end_time}}</p>#}
-   <p id="endtime">{{ auctioneer.end_time|date:'Y-m-d'}} {{ auctioneer.end_time|time:"H:i" }}</p>
-   <p><b>Seller Name: {{ auctioneer.seller.username }}</b></p>
-   <p><b>Status: {{ auctioneer.status }}</b></p>
+    <p>{{ auctioneer.end_time}}</p>
+    <p><b>Seller Name: {{ auctioneer.seller.username }}</b></p>
+    <p><b>Status: {{ auctioneer.status }}</b></p>
+
 </font>
 
 

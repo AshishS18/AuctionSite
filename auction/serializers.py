@@ -21,7 +21,8 @@ class AuctionSerializer(serializers.ModelSerializer):
                   'start_time',
                   'end_time',
                   'base_price',
-                  'title']
+                  'title',
+                  'status']
 
 
 class BidSerializer(serializers.ModelSerializer):
