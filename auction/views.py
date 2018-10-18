@@ -29,13 +29,14 @@ def login_view(request):
     else:
         if request.method == 'POST':
             username = request.POST['username']
+
             password = request.POST['password']
             user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
                     login(request, user)
                     posts = auction.objects.all()
-                    message = "Log in succesfull"
+                    message = "Log in successful"
                     return render(request, "home.html", {'msg': message, 'posts': posts})
             else:
                 posts = auction.objects.all()
@@ -107,7 +108,7 @@ def add_auction(request):
                 return render(request, 'product_added.html', {'message': message})
             else:
                 form = createAuction()
-                return render(request, 'add_auction.html', {'form' : form, "error" : "Not valid data"})
+                return render(request, 'add_auction.html', {'form': form, 'error': "Not valid data"})
 
     else:
         message = "You have to log in first"
@@ -139,24 +140,24 @@ def bid_auction(request, id):
             prev_bid_winning = bid.objects.filter(is_winning=True, auctioneer=auctions)
             if prev_bid_winning:
                 prev_bid_winning = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
-
+            prev_bids = bid.objects.filter(auctioneer=auctions)
             if prev_bid_winning:
                 if prev_bid_winning.user == request.user:
                     msg = "You are already wining this auction."
-                    return render(request, "auction.html", {'auctioneer':auctions,'bb':prev_bid_winning, 'msg': msg})
+                    return render(request, "auction.html", {'auctioneer':auctions,'bb':prev_bids, 'msg': msg})
 
                 if float(amount) - prev_bid_winning.amount < 1:
                     msg = "Bid has to be at atleast 1 greater than previous bids."
-                    return render("auction.html", {'auctioneer':auctions,'bb':prev_bid_winning, 'msg': msg})
+                    return render("auction.html", {'auctioneer':auctions,'bb':prev_bids, 'msg': msg})
 
                 prev_bid_winning.is_winning = False
                 prev_bid_winning.save()
 
             b = bid(user=request.user, amount=amount, auctioneer=auctions, is_winning=True)
             b.save()
-
+            prev_bids = bid.objects.filter(auctioneer=auctions)
             msg = "Bid saved succesfully."
-            return render(request, "auction.html", {'auctioneer':auctions,'bb':b, 'msg': msg})
+            return render(request, "auction.html", {'auctioneer':auctions,'bb':prev_bids, 'msg': msg})
 
         else:
             auctions = auction.objects.filter(id=id)
@@ -202,7 +203,8 @@ def view_auction(request, id):
         bb = bid.objects.filter(is_winning=True, auctioneer=auctioneer)
         if bb:
             bb = bid.objects.filter(is_winning=True, auctioneer=auctioneer).get()
-        return render(request, "auction.html", {'auctioneer': auctioneer, 'bb': bb})
+        prev_bids = bid.objects.filter(auctioneer=auctioneer)
+        return render(request, "auction.html", {'auctioneer': auctioneer, 'bb': prev_bids})
     else:
         message = "Auction not found."
         posts = auction.objects.all()

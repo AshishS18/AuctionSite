@@ -9,7 +9,8 @@ End time: {{ auctioneer.end_time }}<br>
 Seller: {{ auctioneer.seller.username }}<br>
 Status: {{ auctioneer.status }}</b></p></font>
 
-{% if bb %}<FONT COLOR="#FF0000"><h4>Highest bid: {{ bb.amount }}, user: {{ bb.user }}</h4></FONT>{% endif %}
+{% if bb %}
+{% for b in bb %}<FONT COLOR="#000EE9"><h4>Bid amount {{ b.amount }}, Bidder: {{ b.user }}</h4></FONT>{% endfor %}{% endif %}
 
 <div style="text-align: left;">
 <h3></h3>
