@@ -26,8 +26,8 @@ urlpatterns = [
     path('bidlist/', views.BidList.as_view(), name='bid_list'),
     path('bidlist/<int:id>', views.BidDetail.as_view(), name='bid_detail'),
 
-    path('auctions', views.auctionPage, name='auction'),
-    path('auctions/<int:id>', views.auctionPage, name='auction'),
+    # path('auctions', views.auctionPage, name='auction'),
+    # path('auctions/<int:id>', views.auctionPage, name='auction'),
 
 
     path('user', views.user_page, name='userpage')
