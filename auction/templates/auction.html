@@ -1,18 +1,22 @@
+<style>
+    #endtime{
+        display:none;
+    }
+</style>
 {% extends "base.html" %}
 {% block content %}
 <strong>{{ msg }}</strong>
-<p>{{ auctioneer.end_time|date:'Y-m-d'}}{{ auctioneer.end_time|time:"H:i" }}</p>
+<p id="endtime">{{ auctioneer.end_time|date:'Y-m-d'}} {{ auctioneer.end_time|time:"H:i" }}</p>
 <img src="{{ auctioneer.image.url }}">
 <h2>{{ auctioneer.title }}</h2>
 <h4>{{ auctioneer.description }}</h4>
-   <p>hello</p>
+    <p id="demo"></p>
 <font size="2"><p><b>Base price: {{ auctioneer.base_price }}</b></p>
-    <p>{{ auctioneer.end_time}}</p>
     <p><b>Seller Name: {{ auctioneer.seller.username }}</b></p>
     <p><b>Status: {{ auctioneer.status }}</b></p>
 </font>
 {% if bb %}
-<p id="demo"></p>
+
 <p id="message"></p>
 {% for b in bb %}<FONT COLOR="#000EE9"><h4>Bid amount {{ b.amount }}, Bidder: {{ b.user }}, Bid Time: {{ b.bid_time }}</h4></FONT>{% endfor %}
 {% endif %}
@@ -51,8 +55,7 @@ var x = setInterval(function() {
    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
    // Output the result in an element with id="demo"
-   document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-   + minutes + "m " + seconds + "s ";
+   document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
    // If the count down is over, write some text
    if (distance < 0) {
