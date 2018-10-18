@@ -20,7 +20,7 @@
 {% if bb %}
 <p id="demo"></p>
 <p id="message"></p>
-{% for b in bb %}<FONT COLOR="#000EE9"><h4>Bid amount {{ b.amount }}, Bidder: {{ b.user }}</h4></FONT>{% endfor %}
+{% for b in bb %}<FONT COLOR="#000EE9"><h4>Bid amount {{ b.amount }}, Bidder: {{ b.user }}, Bid Time: {{ b.bid_time }}</h4></FONT>{% endfor %}
 {% endif %}
 
 
