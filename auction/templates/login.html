@@ -8,16 +8,17 @@
   {% if form.errors%}
     <p> {% trans "Password or username is incorrect" %}</p>
   {% endif %}
-
+<div class="container">
     <form action="" method="post">
         {% csrf_token %}
-        <label for="username">{% trans "Username: " %}</label>
-        <input type="text" name="username" value="" id="username">
-        <label for="password">{% trans "Password: " %}</label>
-        <input type="password" name="password" value="" id="password">
+            <label for="username">{% trans "Username: " %}</label>
+            <input class="form-control" type="text" name="username" value="" id="username">
+            <label for="password">{% trans "Password: " %}</label>
+            <input class="form-control" type="password" name="password" value="" id="password">
 
-        <input type="submit" value={% trans "Submit" %}>
-        <input type="hidden" name="next" value="loginpage">
+            <input class="btn btn-lg btn-primary my-3" type="submit" value={% trans "Submit" %}>
+            <input type="hidden" name="next" value="loginpage">
     </form>
+</div>
 
 {% endblock %}

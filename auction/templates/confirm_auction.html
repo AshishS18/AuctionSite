@@ -12,7 +12,7 @@
 
     <form action="/saveauction/" method="post">
         {% csrf_token %}
-         {{ form.as_p }}
+         {{ form.as_table }}
          <INPUT TYPE=HIDDEN NAME="description" VALUE="{{description}}">
          <INPUT TYPE=HIDDEN NAME="title" VALUE="{{title}}">
          <INPUT TYPE=HIDDEN NAME="start_time" VALUE="{{start_time}}">
