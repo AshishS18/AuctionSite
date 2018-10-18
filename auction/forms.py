@@ -8,7 +8,6 @@ from crispy_forms.helper import FormHelper
 
 
 class createAuction(forms.ModelForm):
-
     # class Meta:
     #     model = auction
     #     fields = ['title', 'description', 'start_time', 'end_time', 'location', 'base_price']

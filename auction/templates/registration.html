@@ -1,33 +1,15 @@
 {% extends "base.html" %}
-
-{% block title %}{"Create User"}{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
   <div class="container">
     <h2>Registration Form</h2>
-    <form method="post" novalidate>
-        {% csrf_token %}
-        {% for field in form %}
-    <div class="row">
-      <div class="col-md-2">
-        {{ field.label_tag }}
-       </div>
-        <div class="col-md-pull-9 pull-left">
-         {{ field }}
-    <span>
-        {% for error in field.errors %}
-           <div class="row">
-             <div class="alert alert-danger">{{error}}</div>
-           </div>
-          {% endfor %}
-    </span>
-        </div>
-    </div>
-  {% endfor %}
+    <form method="post" action="{% url 'register' %}" >
 
+         {% crispy form %}
 
-        <input class="btn btn-lg btn-primary" type="submit" value="Sign Up">
+        <button class="btn btn-lg btn-primary" type="submit">Sign Up</button>
     </form>
     </div>
 
