@@ -9,13 +9,6 @@ from crispy_forms.helper import FormHelper
 
 
 class createAuction(forms.ModelForm):
-
-    # class Meta:
-    #     model = auction
-    #     fields = ['title', 'description', 'start_time', 'end_time', 'location', 'base_price']
-    #     widgets = {'start_time': forms.DateTimeInput(widget=DateTimePicker(),),
-    #                'end_time': forms.DateTimeInput(attrs={'class': 'datetime-input'})}
-
     class Meta:
         model = auction
         fields = ['title', 'description', 'start_time', 'end_time', 'location', 'base_price', 'image']

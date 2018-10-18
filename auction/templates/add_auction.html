@@ -1,3 +1,4 @@
+
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
@@ -8,8 +9,9 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 </head>
-{% extends "base.html" %}
 
+
+{% extends "base.html" %}
 <h2>Add Auction</h2>
 {% block content %}
     <strong>{{ msg }}</strong>
@@ -24,6 +26,7 @@
         {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
+
 <script>
        $(function () {
        $('.datetimepicker1').datetimepicker({

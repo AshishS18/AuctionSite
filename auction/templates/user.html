@@ -1,86 +1,156 @@
-{% extends "base.html" %}
-{% block content %}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
     <p id="user_name"></p>
     <p id="user_email"></p>
-    <h3>Your added Auctions</h3>
-    <p id="added_auction"></p>
-    <h3>Your added Bids</h3>
     <p id="added_bids"></p>
-    <script>
-        {#setInterval(receive, 1000);#}
 
-        function user_detail() {
-            $.get('http://127.0.0.1:8000/userlist/' +{{ user_id }}, function (user_data) {
-                    if (user_data.length !== 0) {
-                        document.getElementById("user_name").innerHTML = user_data.username;
-                        document.getElementById("user_email").innerHTML = user_data.email;
 
-                    }
+<h3>Your added Auctions</h3>
+<div class="container">
+    <table class="table">
+        <xthead>
+        <tr>
+            <th>ProductName</th>
+            <th>ProductLocation</th>
+            <th>StartTime</th>
+            <th>EndTime</th>
+            <th>BasePrice</th>
+        </tr>
+        </xthead>
+        <tbody id="add_product_in_table">
+        </tbody>
+    </table>
+</div>
+
+<h3>Your added Bids</h3>
+
+<div class="container">
+    <table class="table">
+        <xthead>
+        <tr>
+            <th>ProductName</th>
+            <th>ProductLocation</th>
+            <th>BasePrice</th>
+            <th>Amount</th>
+            <th>is_winning</th>
+        </tr>
+        </xthead>
+        <tbody id="add_bid_in_table">
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    {#setInterval(receive, 1000);#}
+
+    function user_detail() {
+        $.get('http://127.0.0.1:8000/userlist/' +{{ user_id }}, function (user_data) {
+                if (user_data.length !== 0) {
+                    document.getElementById("user_name").innerHTML = user_data.username;
+                    document.getElementById("user_email").innerHTML = user_data.email;
+
                 }
-            )
+            }
+        )
 
-        }
+    }
 
 
-        function user_auction() {
-            $.get('http://127.0.0.1:8000/auctionlist/', function (auctiondata) {
-                    if (auctiondata.length !== 0) {
-                        var node = document.createElement("span");
-                        for (i = 0; i < auctiondata.length; i++) {
-                            if (auctiondata[i].seller_id == {{ user_id }}) {
-                                var textnode = document.createTextNode(auctiondata[i].location + " : " + auctiondata[i].description + " : " + auctiondata[i].start_time + " : " + auctiondata[i].end_time + " : " + auctiondata[i].base_price + " : " + auctiondata[i].title)
-                                var b = document.createElement("br");
-                                node.appendChild(textnode)
-                                node.appendChild(b)
-                            }
+    function user_auction() {
+        $.get('http://127.0.0.1:8000/auctionlist/', function (auctiondata) {
+                if (auctiondata.length !== 0) {
+                    for (i = 0; i < auctiondata.length; i++) {
+                        var tr_node = document.createElement("tr");
+                        if (auctiondata[i].seller_id == {{ user_id }}) {
+
+                            var td_node_name = document.createElement("td");
+                            var td_node_location = document.createElement("td");
+                            var td_node_starttime = document.createElement("td");
+                            var td_node_endtime = document.createElement("td");
+                            var td_node_baseprice = document.createElement("td");
+
+                            td_node_name.appendChild(document.createTextNode(auctiondata[i].title));
+                            td_node_location.appendChild(document.createTextNode(auctiondata[i].location));
+                            td_node_starttime.appendChild(document.createTextNode(auctiondata[i].start_time));
+                            td_node_endtime.appendChild(document.createTextNode(auctiondata[i].end_time));
+                            td_node_baseprice.appendChild(document.createTextNode(auctiondata[i].base_price));
+                            tr_node.appendChild(td_node_name);
+                            tr_node.appendChild(td_node_location);
+                            tr_node.appendChild(td_node_starttime);
+                            tr_node.appendChild(td_node_endtime);
+                            tr_node.appendChild(td_node_baseprice);
+                            document.getElementById('add_product_in_table').appendChild(tr_node);
                         }
-                        document.getElementById('added_auction').appendChild(node);
                     }
+
                 }
-            )
+            }
+        )
 
-        }
+    }
 
-        function user_bid() {
-            $.get('http://127.0.0.1:8000/bidlist/', function (biddata) {
-                    if (biddata.length !== 0) {
-                        var node = document.createElement("span");
+    function user_bid() {
+        $.get('http://127.0.0.1:8000/bidlist/', function (biddata) {
+                if (biddata.length !== 0) {
+                    var node = document.createElement("span");
 
-                        for (i = 0; i < biddata.length; i++) {
-                            if (biddata[i].user == {{ user_id }}) {
+                    for (i = 0; i < biddata.length; i++) {
+                        var tr_node = document.createElement("tr");
+                        if (biddata[i].user == {{ user_id }}) {
+                             var td_node_name = document.createElement("td");
+                            var td_node_location = document.createElement("td");
+                            var td_node_baseprice = document.createElement("td");
+                            var td_node_amount = document.createElement("td");
+                            var td_node_iswinning = document.createElement("td");
 
-                                auction_id = (biddata[i].auctioneer);
-                                $.get('http://127.0.0.1:8000/auctionlist/'+auction_id, function (bid_product) {
-                                        if (bid_product.length !== 0) {
-                                            var product_node = document.createTextNode('title : '+bid_product.title+'description : '+bid_product.description + 'start_time : '+ bid_product.start_time+'end_time : '+ bid_product.end_time+ 'base_price : '+bid_product.base_price);
-                                            var b = document.createElement("br");
-                                            node.appendChild(product_node);
-                                             node.appendChild(b);
-                                            console.log(bid_product);
-                                        }
+                            auction_id = (biddata[i].auctioneer);
+                            $.get('http://127.0.0.1:8000/auctionlist/' + auction_id, function (bid_product) {
+                                    if (bid_product.length !== 0) {
+                                        td_node_name.appendChild(document.createTextNode(bid_product.title));
+                                        td_node_location.appendChild(document.createTextNode(bid_product.location));
+                                        td_node_baseprice.appendChild(document.createTextNode(auctiondata[i].base_price));
+                                        var product_node = document.createTextNode('title : ' + bid_product.title + 'description : ' + bid_product.description + 'start_time : ' + bid_product.start_time + 'end_time : ' + bid_product.end_time + 'base_price : ' + bid_product.base_price);
+                                        var b = document.createElement("br");
+                                        node.appendChild(product_node);
+                                        node.appendChild(b);
+                                        console.log(bid_product);
                                     }
-                                )
-                                var textnode = document.createTextNode(biddata[i].amount);
-                                var b = document.createElement("br");
-                                node.appendChild(textnode)
-                                node.appendChild(b)
-                            }
+                                }
+                            )
+                            td_node_amount.appendChild(document.createTextNode(biddata[i].amount));
+                            td_node_iswinning.appendChild(document.createTextNode(biddata[i].is_winning));
+                            tr_node.appendChild(td_node_name);
+                            tr_node.appendChild(td_node_location);
+                            tr_node.appendChild(td_node_baseprice);
+                            tr_node.appendChild(td_node_amount);
+                            tr_node.appendChild(td_node_iswinning);
+                            document.getElementById('add_bid_in_table').appendChild(tr_node);
+
                         }
-                        document.getElementById('added_bids').appendChild(node);
-
-
                     }
+                    document.getElementById('added_bids').appendChild(node);
 
 
                 }
-            )
 
 
-        }
+            }
+        )
 
-        window.onload = user_detail();
-        window.onload = user_auction();
-        window.onload = user_bid();
-    </script>
-{% endblock %}
+
+    }
+
+    window.onload = user_detail();
+    window.onload = user_auction();
+    window.onload = user_bid();
+</script>
+</body>
+</html>
 
