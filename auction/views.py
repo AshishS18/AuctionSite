@@ -293,7 +293,3 @@ class AuctionDetail(generics.RetrieveAPIView):
     #     return JsonResponse(data.data, safe=False)
 
 
-def auctionPage(request, id=None):
-    if request.method == 'GET':
-        auctions_list = get_auctions(id)
-        return render(request, 'home.html', {'auctions_list': auctions_list})
