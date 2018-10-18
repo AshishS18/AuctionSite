@@ -5,6 +5,7 @@ from datetimewidget.widgets import DateTimeWidget
 from datetimepicker.widgets import DateTimePicker
 
 from .models import auction
+from crispy_forms.helper import FormHelper
 
 
 class createAuction(forms.ModelForm):
@@ -28,6 +29,7 @@ class UserCreateForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2")
+        helper = FormHelper()
 
     def save(self, commit=True):
         user = super(UserCreateForm, self).save(commit=False)
