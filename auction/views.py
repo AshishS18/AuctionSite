@@ -111,17 +111,6 @@ def add_auction(request):
         else:
             form = createAuction(request.POST, request.FILES)
             if form.is_valid():
-                product = form.save(commit=False)
-                product.seller = request.user
-                product.image = request.FILES['image']
-                file_type = product.image.url.split('.')[-1]
-                file_type = file_type.lower()
-                if file_type not in IMAGE_FILE_TYPES:
-                    message = "This filetype is not supported."
-                    form = createAuction()
-                    return render(request, 'add_auction.html', {'msg': message, 'form': form})
-                product.save()
-
                 cd = form.cleaned_data
                 end_time = cd['end_time']
                 start_time = cd['start_time']
@@ -135,6 +124,16 @@ def add_auction(request):
                     form = createAuction()
                     return render(request, 'add_auction.html', {'msg': message, 'form': form})
 
+                product = form.save(commit=False)
+                product.seller = request.user
+                product.image = request.FILES['image']
+                file_type = product.image.url.split('.')[-1]
+                file_type = file_type.lower()
+                if file_type not in IMAGE_FILE_TYPES:
+                    message = "This filetype is not supported."
+                    form = createAuction()
+                    return render(request, 'add_auction.html', {'msg': message, 'form': form})
+                product.save()
                 message = "New auction has been saved"
                 return render(request, 'product_added.html', {'message': message})
             else:
@@ -154,8 +153,6 @@ def bid_auction(request, id):
             amount = request.POST['am']
             auctions = auction.objects.filter(id=id)
             if auctions:
-                # auctions = get_auctions(id)
-                # print(auctions)
                 auctions = auction.objects.get(id=id)
             else:
                 msg = "Auction not found"

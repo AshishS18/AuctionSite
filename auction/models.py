@@ -22,7 +22,7 @@ class auction(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
-    location = models.CharField(max_length=3)
+    location = models.CharField(max_length=25)
     status = models.CharField(max_length=1, default='U')
     image = models.FileField(name='image')
 
