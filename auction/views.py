@@ -110,6 +110,7 @@ def add_auction(request):
                 form = createAuction()
                 return render(request, 'add_auction.html', {'form': form, 'error': "Not valid data"})
 
+
     else:
         message = "You have to log in first"
         posts = auction.objects.all()
@@ -122,6 +123,8 @@ def bid_auction(request, id):
             amount = request.POST['am']
             auctions = auction.objects.filter(id=id)
             if auctions:
+                # auctions = get_auctions(id)
+                # print(auctions)
                 auctions = auction.objects.get(id=id)
             else:
                 msg = "Auction not found"
@@ -129,13 +132,13 @@ def bid_auction(request, id):
 
             if auctions.status != 'A':
                 msg = "Auction not active"
-                return render(request, "auction.html", {'auctioneer':auctions, 'msg': msg})
+                return render(request, "auction.html", {'auctioneer': auctions, 'msg': msg})
             if request.user == auctions.seller:
                 msg = "Can not bid on your own auction"
-                return render(request, "auction.html", {'auctioneer':auctions, 'msg': msg})
+                return render(request, "auction.html", {'auctioneer': auctions, 'msg': msg})
             if auctions.base_price > float(amount) or (float(amount) - auctions.base_price < 1):
                 msg = "Amount have to be at least 1 greater than minimum price."
-                return render(request, "auction.html", {'auctioneer':auctions, 'msg': msg})
+                return render(request, "auction.html", {'auctioneer': auctions, 'msg': msg})
 
             prev_bid_winning = bid.objects.filter(is_winning=True, auctioneer=auctions)
             if prev_bid_winning:
@@ -157,6 +160,7 @@ def bid_auction(request, id):
             b.save()
             prev_bids = bid.objects.filter(auctioneer=auctions)
             msg = "Bid saved succesfully."
+
             return render(request, "auction.html", {'auctioneer':auctions,'bb':prev_bids, 'msg': msg})
 
         else:
@@ -170,7 +174,7 @@ def bid_auction(request, id):
             b = bid.objects.filter(is_winning=True, auctioneer=auctions)
             if b:
                 b = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
-            return render(request, "auction.html", {'auctioneer':auctions, 'bb':b})
+            return render(request, "auction.html", {'auctioneer': auctions, 'bb': b})
 
         option = request.POST.get('option', '')
         if option == 'Yes':
@@ -197,9 +201,9 @@ def bid_auction(request, id):
 
 
 def view_auction(request, id):
-    auctioneer = auction.objects.filter(id = id)
+    auctioneer = auction.objects.filter(id=id)
     if auctioneer:
-        auctioneer = auction.objects.get(id = id)
+        auctioneer = auction.objects.get(id=id)
         bb = bid.objects.filter(is_winning=True, auctioneer=auctioneer)
         if bb:
             bb = bid.objects.filter(is_winning=True, auctioneer=auctioneer).get()
@@ -212,7 +216,7 @@ def view_auction(request, id):
 
 
 def background_jobs():
-    #changing status and is_winning
+    # changing status and is_winning
     auctions = auction.objects.all()
     current_time = datetime.now(pytz.timezone('Asia/Kolkata'))
     for auc in auctions:
@@ -243,6 +247,14 @@ def background_jobs():
         if (b.user == b.auctioneer.seller):
             b.delete()
 
+
+def user_page(request):
+    if request.user.is_authenticated:
+        return render(request, 'user.html', {'user_id': request.user.id})
+    else:
+        return render(request, 'user.html')
+
+
 class AuctionList(generics.ListAPIView):
     queryset = auction.objects.all()
     serializer_class = AuctionSerializer
@@ -253,20 +265,34 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
 
 
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
 class BidList(generics.ListAPIView):
     queryset = bid.objects.all()
     serializer_class = BidSerializer
 
 
-class AuctionDetail(APIView):
+class BidDetail(generics.ListAPIView):
     def get(self, request, id):
-        specfic_product = auction.objects.filter(seller_id=id)
-        data = AuctionSerializer(specfic_product, many=True)
+        specfic_bid = bid.objects.filter(auctioneer=id)
+        data = BidSerializer(specfic_bid, many=True)
         return JsonResponse(data.data, safe=False)
+
+
+class AuctionDetail(generics.RetrieveAPIView):
+    queryset = auction.objects.all()
+    serializer_class = AuctionSerializer
+
+    # def get(self, request, id):
+    #     specfic_product = auction.objects.filter(id=id)
+    #     data = AuctionSerializer(specfic_product, many=True)
+    #     return JsonResponse(data.data, safe=False)
 
 
 def auctionPage(request, id=None):
     if request.method == 'GET':
         auctions_list = get_auctions(id)
         return render(request, 'home.html', {'auctions_list': auctions_list})
-
