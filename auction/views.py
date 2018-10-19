@@ -154,20 +154,17 @@ def bid_auction(request, id):
             auctions = auction.objects.filter(id=id)
             if auctions:
                 auctions = auction.objects.get(id=id)
-            else:
-                messages.add_message(request, messages.WARNING, 'Auction not found')
-                return redirect('home', msg=messages)
-
             prev_bids = bid.objects.filter(auctioneer=auctions)
-            if auctions.status != 'A':
-                msg = "Auction not active"
-                return render(request, "auction.html", {'auctioneer': auctions,'bb':prev_bids, 'msg': msg})
-            elif request.user == auctions.seller:
+            if request.user == auctions.seller:
                 msg = "Can not bid on your own auction"
                 return render(request, "auction.html", {'auctioneer': auctions,'bb':prev_bids, 'msg': msg})
-            elif auctions.base_price > float(amount) or (float(amount) - auctions.base_price < 1):
+            # if type(amount) != int or type(amount) != float:
+            #     msg = "Enter a valid bid"
+            #     return render(request, "auction.html", {'auctioneer': auctions, 'bb': prev_bids, 'msg': msg})
+            if auctions.base_price > float(amount) or (float(amount) - auctions.base_price < 1):
                 msg = "Amount have to be at least 1 greater than minimum price."
-                return render(request, "auction.html", {'auctioneer': auctions,'bb':prev_bids, 'msg': msg})
+                return render(request, "auction.html", {'auctioneer': auctions,'bb': prev_bids, 'msg': msg})
+
 
             prev_bid_winning = bid.objects.filter(is_winning=True, auctioneer=auctions)
             if prev_bid_winning:
@@ -176,7 +173,6 @@ def bid_auction(request, id):
                 if prev_bid_winning.user == request.user:
                     msg = "You are already wining this auction."
                     return render(request, "auction.html", {'auctioneer':auctions,'bb': prev_bids, 'msg': msg})
-
                 if float(amount) - prev_bid_winning.amount < 1:
                     msg = "Bid has to be at atleast 1 greater than previous bids."
                     return render("auction.html", {'auctioneer':auctions,'bb': prev_bids, 'msg': msg})
@@ -189,39 +185,8 @@ def bid_auction(request, id):
             prev_bids = bid.objects.filter(auctioneer=auctions)
             msg = "Bid saved succesfully."
 
-            return render(request, "auction.html", {'auctioneer':auctions,'bb':prev_bids, 'msg': msg})
+            return render(request, "auction.html", {'auctioneer':auctions,'bb': prev_bids, 'msg': msg})
 
-        else:
-            auctions = auction.objects.filter(id=id)
-            if auctions:
-                auctions = auction.objects.get(id=id)
-            else:
-                msg = "Auction not found"
-                return render(request, "auction.html", {'msg': msg})
-
-            b = bid.objects.filter(is_winning=True, auctioneer=auctions)
-            if b:
-                b = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
-            return render(request, "auction.html", {'auctioneer': auctions, 'bb': prev_bids, })
-
-        option = request.POST.get('option', '')
-        if option == 'Yes':
-            new_title = request.POST['title']
-            new_description = request.POST['description']
-            new_end_time = dateutil.parser.parse(request.POST.get('end_time'))
-            new_base_price = request.POST['base_price']
-            new_seller = request.user
-            new_start_time = dateutil.parser.parse(request.POST.get('start_time'))
-            new_location = request.POST.get('location')
-            a = auction(title=new_title, description=new_description, end_time=new_end_time, base_price=new_base_price,
-                        seller=new_seller, start_time=new_start_time, location=new_location)
-            a.save()
-            message = "New auction has been saved and a confirmation email has been sent to your email."
-            return render('product_added.html', {'message': message})
-        else:
-            error = "Auction is not saved"
-            form = createAuction()
-            return render('add_auction.html', {'form': form, 'error': error})
     else:
         message = "You have to log in first"
         posts = auction.objects.all()
@@ -239,8 +204,7 @@ def view_auction(request, id):
         return render(request, "auction.html", {'auctioneer': auctioneer, 'bb': prev_bids})
     else:
         message = "Auction not found."
-        posts = auction.objects.all()
-        return render(request, "home.html", {'msg': message, 'posts': posts})
+        return redirect('404/',{'msg':message}, permanent=True)
 
 
 # def background_jobs():
@@ -284,9 +248,5 @@ class AuctionDetail(generics.RetrieveAPIView):
     queryset = auction.objects.all()
     serializer_class = AuctionSerializer
 
-    # def get(self, request, id):
-    #     specfic_product = auction.objects.filter(id=id)
-    #     data = AuctionSerializer(specfic_product, many=True)
-    #     return JsonResponse(data.data, safe=False)
 
 
