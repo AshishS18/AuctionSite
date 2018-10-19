@@ -53,7 +53,7 @@ nav{
             <div  class="col-md-8 table">
                         <h3 class="py-3">{{ auctioneer.title }}</h3>
                  <div class="pull-right">
-                     {% if auctioneer.status == 'A' %}
+                     {% if auctioneer.status == 'A' and auctioneer.seller.username != request.user.username %}
                     <form class="form-inline my-2 my-lg-0 " action="/bidauction/{{ auctioneer.id }}/" method="POST">
                         {% csrf_token %}
                         <input class="form-control"  type="search" title='am' id='am' name='am' placeholder=" New Bid Amount">&nbsp
@@ -88,7 +88,7 @@ nav{
                          {% elif auctioneer.status == 'U' %}
                              <h3 class="input-lg">Starts in : &nbsp </h3>
                          {% elif auctioneer.status == 'F' %}
-                             <h3 class="input-lg">Ended : &nbsp </h3>
+                             <h3 class="input-lg">ENDED &nbsp </h3>
                         {% endif %}
                         <div class="pull-right">
                            <H3 id="demo"></H3>
@@ -97,7 +97,7 @@ nav{
                 </div>
             </div>
         </div>
-
+            {% if auctioneer.status == 'A' %}
             <div class="card w-100 bg-white rounded p-3 my-3">
                 <table class="table table-striped">
                     <thead>
@@ -129,7 +129,37 @@ nav{
                     {% endfor %}
                 </table>
             </div>
-
+        {%  endif %}
+        {% if auctioneer.status == 'F' %}
+        <div class="card w-100 bg-white rounded p-3 my-3">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                            Bid amount
+                        </th>
+                        <th>
+                            Winner
+                        </th>
+                        <th>
+                            Bid Time
+                        </th>
+                    </tr>
+                    </thead>
+                        <tr>
+                            <td>
+                                &#x20b9;{{ winner.amount }}
+                            </td>
+                            <td>
+                                {{ winner.user }}
+                            </td>
+                            <td>
+                                {{ winner.bid_time }}
+                            </td>
+                        </tr>
+                </table>
+            </div>
+        {% endif %}
         </div>
     </div>
 

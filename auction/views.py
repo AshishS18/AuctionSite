@@ -201,8 +201,9 @@ def view_auction(request, id):
         bb = bid.objects.filter(is_winning=True, auctioneer=auctioneer)
         if bb:
             bb = bid.objects.filter(is_winning=True, auctioneer=auctioneer).get()
-        prev_bids = bid.objects.filter(auctioneer=auctioneer)
-        return render(request, "auction.html", {'auctioneer': auctioneer, 'bb': prev_bids})
+        prev_bids = bid.objects.filter(auctioneer=auctioneer).order_by('-amount')
+        winner = prev_bids.first()
+        return render(request, "auction.html", {'auctioneer': auctioneer, 'bb': prev_bids, 'winner': winner})
     else:
         message = "Auction not found."
         return redirect('404/',{'msg':message}, permanent=True)
