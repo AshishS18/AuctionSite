@@ -7,6 +7,9 @@
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
 
+body{
+    background-color: #BBDEFB;
+}
 .accent{
     background-color:  #FF4081;;
 }
@@ -52,7 +55,4 @@ nav{
     display: flex;
     justify-content: space-around;
     flex-direction: row;
-}
-@media and only screen {
-
 }

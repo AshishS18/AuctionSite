@@ -3,6 +3,7 @@ from auction import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -26,14 +27,9 @@ urlpatterns = [
     path('bidlist/', views.BidList.as_view(), name='bid_list'),
     path('bidlist/<int:id>', views.BidDetail.as_view(), name='bid_detail'),
 
-    # path('auctions', views.auctionPage, name='auction'),
-    # path('auctions/<int:id>', views.auctionPage, name='auction'),
-
-
     path('user', views.user_page, name='userpage')
 
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
