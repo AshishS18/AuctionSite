@@ -11,7 +11,9 @@ class createAuction(forms.ModelForm):
     class Meta:
         model = auction
         fields = ['title', 'description', 'start_time', 'end_time', 'location', 'base_price', 'image']
-        widgets = {'start_time': forms.DateTimeInput(attrs={'class': 'datetimepicker1'}),
+        widgets = {
+
+            'start_time': forms.DateTimeInput(attrs={'class': 'datetimepicker1'}),
                    'end_time': forms.DateTimeInput(attrs={'class': 'datetimepicker1'})}
 
 

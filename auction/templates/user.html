@@ -37,7 +37,7 @@
                 <th>ProductLocation</th>
                 <th>BasePrice</th>
                 <th>Amount</th>
-                <th>is_winning</th>
+{#                <th>is_winning</th>#}
             </tr>
         </xthead>
         <tbody id="add_bid_in_table">
@@ -76,15 +76,8 @@
 
                             td_node_name.appendChild(document.createTextNode(auctiondata[i].title));
                             td_node_location.appendChild(document.createTextNode(auctiondata[i].location));
-                            td_node_starttime.appendChild(document.createTextNode(auctiondata[i].start_time));
-                            td_node_endtime.appendChild(document.createTextNode(
-                                {#(auctiondata[i].end_time).slice(12, 16)#}
-                                {#+ ' ' +#}
-                                 (auctiondata[i].end_time).slice(9, 10) +
-                                (auctiondata[i].end_time).slice(4, 5)  +
-                                (auctiondata[i].end_time).slice(5, 7) +
-                                (auctiondata[i].end_time).slice(4, 5)+
-                                (auctiondata[i].end_time).slice(0, 4)));
+                            td_node_starttime.appendChild(document.createTextNode((new Date(auctiondata[i].start_time)).toDateString() + ' ' + (new Date(auctiondata[i].start_time)).toTimeString().slice(0,5)));
+                            td_node_endtime.appendChild(document.createTextNode((new Date(auctiondata[i].end_time)).toDateString() + ' ' + (new Date(auctiondata[i].end_time)).toTimeString().slice(0,5)));
                             td_node_baseprice.appendChild(document.createTextNode(auctiondata[i].base_price));
                             tr_node.appendChild(td_node_name);
                             tr_node.appendChild(td_node_location);
@@ -126,19 +119,19 @@
             var td_node_location = document.createElement("td");
             var td_node_baseprice = document.createElement("td");
             var td_node_amount = document.createElement("td");
-            var td_node_iswinning = document.createElement("td");
+            {#var td_node_iswinning = document.createElement("td");#}
             td_node_name.appendChild(document.createTextNode(product_name[i]));
             td_node_location.appendChild(document.createTextNode(product_location[i]));
             td_node_baseprice.appendChild(document.createTextNode(product_baseprice[i]));
             td_node_amount.appendChild(document.createTextNode(amounts[i]));
-            td_node_iswinning.appendChild(document.createTextNode(iswinning[i]));
+            {#td_node_iswinning.appendChild(document.createTextNode(iswinning[i]));#}
 
             tr_node.appendChild(td_node_name);
             tr_node.appendChild(td_node_location);
             tr_node.appendChild(td_node_baseprice);
             tr_node.appendChild(td_node_amount);
             {#console.log(td_node_iswinning)#}
-            tr_node.appendChild(td_node_iswinning);
+            {#tr_node.appendChild(td_node_iswinning);#}
             document.getElementById('add_bid_in_table').appendChild(tr_node);
 
         }
@@ -148,7 +141,6 @@
     window.onload = user_detail();
     window.onload = user_auction();
     window.onload = user_bid();
-    {#window.onload = get_products();#}
 </script>
 </body>
 </html>
