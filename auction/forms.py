@@ -22,6 +22,7 @@ class createAuction(forms.ModelForm):
                    'image': forms.FileInput(attrs={'class': 'form-control'})}
         helper = FormHelper()
 
+
     def __init__(self, *args, **kwargs):
         super(createAuction, self).__init__(*args, **kwargs)
         self.helper = FormHelper()

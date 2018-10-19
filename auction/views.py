@@ -212,7 +212,11 @@ def view_auction(request, id):
 
 def user_page(request):
     if request.user.is_authenticated:
-        return render(request, 'user.html', {'user_id': request.user.id})
+        bids = bid.objects.filter(user=request.user.id).values('auctioneer').order_by('auctioneer')
+        l = auction.objects.filter(id__in=bids).order_by('seller_id')
+        bids = bid.objects.filter(user_id=request.user.id).values('amount','is_winning').order_by('auctioneer')
+
+        return render(request, 'user.html', {'user_id': request.user.id, 'auction_list':l, 'bid_list': bids})
     else:
         return render(request, 'user.html')
 

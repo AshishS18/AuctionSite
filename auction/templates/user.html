@@ -1,51 +1,49 @@
-
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <p id="user_name"></p>
-    <p id="user_email"></p>
-    <p id="added_bids"></p>
-
-
-<h3>Your added Auctions</h3>
-<div class="container">
+<h1 id="user_name"></h1>
+<h2 id="user_email"></h2>
+<h3>Your Added Auctions</h3>
+<div class="table-responsive">
     <table class="table">
         <xthead>
-        <tr>
-            <th>ProductName</th>
-            <th>ProductLocation</th>
-            <th>StartTime</th>
-            <th>EndTime</th>
-            <th>BasePrice</th>
-        </tr>
+            <tr>
+                <th>ProductName</th>
+                <th>ProductLocation</th>
+                <th>StartTime</th>
+                <th>EndTime</th>
+                <th>BasePrice</th>
+            </tr>
         </xthead>
         <tbody id="add_product_in_table">
         </tbody>
     </table>
 </div>
 
-<h3>Your added Bids</h3>
+<h3>Your Added Bids</h3>
 
-<div class="container">
+<div class="table-responsive">
     <table class="table">
         <xthead>
-        <tr>
-            <th>ProductName</th>
-            <th>ProductLocation</th>
-            <th>BasePrice</th>
-            <th>Amount</th>
-            <th>is_winning</th>
-        </tr>
+            <tr>
+                <th>ProductName</th>
+                <th>ProductLocation</th>
+                <th>BasePrice</th>
+                <th>Amount</th>
+{#                <th>is_winning</th>#}
+            </tr>
         </xthead>
         <tbody id="add_bid_in_table">
         </tbody>
     </table>
 </div>
-
 
 <script>
     {#setInterval(receive, 1000);#}
@@ -78,8 +76,8 @@
 
                             td_node_name.appendChild(document.createTextNode(auctiondata[i].title));
                             td_node_location.appendChild(document.createTextNode(auctiondata[i].location));
-                            td_node_starttime.appendChild(document.createTextNode(auctiondata[i].start_time));
-                            td_node_endtime.appendChild(document.createTextNode(auctiondata[i].end_time));
+                            td_node_starttime.appendChild(document.createTextNode((new Date(auctiondata[i].start_time)).toDateString() + ' ' + (new Date(auctiondata[i].start_time)).toTimeString().slice(0,5)));
+                            td_node_endtime.appendChild(document.createTextNode((new Date(auctiondata[i].end_time)).toDateString() + ' ' + (new Date(auctiondata[i].end_time)).toTimeString().slice(0,5)));
                             td_node_baseprice.appendChild(document.createTextNode(auctiondata[i].base_price));
                             tr_node.appendChild(td_node_name);
                             tr_node.appendChild(td_node_location);
@@ -96,54 +94,47 @@
 
     }
 
+    var amounts = []
+    var iswinning = []
+    {% for bid in bid_list %}
+        amounts.push({{ bid.amount}})
+        iswinning.push({{ bid.iswinning }})
+    {% endfor %}
+    var product_name = []
+    var product_location = []
+    var product_baseprice = []
+
+    {% for bid in auction_list %}
+        product_baseprice.push({{ bid.base_price }})
+        product_location.push('{{ bid.location }}')
+        product_name.push('{{ bid.title }}')
+
+    {% endfor %}
+
     function user_bid() {
-        $.get('http://127.0.0.1:8000/bidlist/', function (biddata) {
-                if (biddata.length !== 0) {
-                    var node = document.createElement("span");
 
-                    for (i = 0; i < biddata.length; i++) {
-                        var tr_node = document.createElement("tr");
-                        if (biddata[i].user == {{ user_id }}) {
-                             var td_node_name = document.createElement("td");
-                            var td_node_location = document.createElement("td");
-                            var td_node_baseprice = document.createElement("td");
-                            var td_node_amount = document.createElement("td");
-                            var td_node_iswinning = document.createElement("td");
+        for (i = 0; i < amounts.length; i++) {
+            var tr_node = document.createElement("tr");
+            var td_node_name = document.createElement("td");
+            var td_node_location = document.createElement("td");
+            var td_node_baseprice = document.createElement("td");
+            var td_node_amount = document.createElement("td");
+            {#var td_node_iswinning = document.createElement("td");#}
+            td_node_name.appendChild(document.createTextNode(product_name[i]));
+            td_node_location.appendChild(document.createTextNode(product_location[i]));
+            td_node_baseprice.appendChild(document.createTextNode(product_baseprice[i]));
+            td_node_amount.appendChild(document.createTextNode(amounts[i]));
+            {#td_node_iswinning.appendChild(document.createTextNode(iswinning[i]));#}
 
-                            auction_id = (biddata[i].auctioneer);
-                            $.get('http://127.0.0.1:8000/auctionlist/' + auction_id, function (bid_product) {
-                                    if (bid_product.length !== 0) {
-                                        td_node_name.appendChild(document.createTextNode(bid_product.title));
-                                        td_node_location.appendChild(document.createTextNode(bid_product.location));
-                                        td_node_baseprice.appendChild(document.createTextNode(auctiondata[i].base_price));
-                                        var product_node = document.createTextNode('title : ' + bid_product.title + 'description : ' + bid_product.description + 'start_time : ' + bid_product.start_time + 'end_time : ' + bid_product.end_time + 'base_price : ' + bid_product.base_price);
-                                        var b = document.createElement("br");
-                                        node.appendChild(product_node);
-                                        node.appendChild(b);
-                                        console.log(bid_product);
-                                    }
-                                }
-                            )
-                            td_node_amount.appendChild(document.createTextNode(biddata[i].amount));
-                            td_node_iswinning.appendChild(document.createTextNode(biddata[i].is_winning));
-                            tr_node.appendChild(td_node_name);
-                            tr_node.appendChild(td_node_location);
-                            tr_node.appendChild(td_node_baseprice);
-                            tr_node.appendChild(td_node_amount);
-                            tr_node.appendChild(td_node_iswinning);
-                            document.getElementById('add_bid_in_table').appendChild(tr_node);
+            tr_node.appendChild(td_node_name);
+            tr_node.appendChild(td_node_location);
+            tr_node.appendChild(td_node_baseprice);
+            tr_node.appendChild(td_node_amount);
+            {#console.log(td_node_iswinning)#}
+            {#tr_node.appendChild(td_node_iswinning);#}
+            document.getElementById('add_bid_in_table').appendChild(tr_node);
 
-                        }
-                    }
-                    document.getElementById('added_bids').appendChild(node);
-
-
-                }
-
-
-            }
-        )
-
+        }
 
     }
 
