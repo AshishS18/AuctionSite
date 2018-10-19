@@ -212,14 +212,15 @@ def view_auction(request, id):
 
 
 def user_page(request):
-   if request.user.is_authenticated:
-       bids = bid.objects.filter(user=request.user.id).values('auctioneer').order_by('auctioneer')
-       l = auction.objects.filter(id__in=bids).order_by('seller_id')
-       bids = bid.objects.filter(user_id=request.user.id).values('amount','is_winning').order_by('auctioneer')
-       auction_seller = auction.objects.filter(seller_id=request.user.id);
-       return render(request, 'user.html', {'user_id': request.user.id, 'auction_list':l, 'bid_list': bids,'auction_seller':auction_seller})
-   else:
-       return render(request, 'user.html')
+    if request.user.is_authenticated:
+        bids = bid.objects.filter(user=request.user.id).values('auctioneer').order_by('auctioneer')
+        l = auction.objects.filter(id__in=bids).order_by('seller_id')
+        bids = bid.objects.filter(user_id=request.user.id).values('amount','is_winning').order_by('auctioneer')
+        auction_seller = auction.objects.filter(seller_id=request.user.id);
+        return render(request, 'user.html', {'user_id': request.user.id, 'auction_list':l, 'bid_list': bids,'auction_seller':auction_seller})
+    else:
+        return render(request, 'user.html')
+
 
 class AuctionList(generics.ListAPIView):
     queryset = auction.objects.all()
