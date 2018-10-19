@@ -1,3 +1,58 @@
-body{
-    background:color;
+.dark-primary-color    { background: #1976D2; }
+.default-primary-color { background: #2196F3; }
+.light-primary-color   { background: #BBDEFB; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FF4081; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }
+
+.accent{
+    background-color:  #FF4081;;
+}
+
+a{
+    text-decoration: none;
+}
+nav{
+    background-color: #1976D2;
+}
+
+.justify-left {
+    margin-right: auto;
+}
+
+.time-container{
+
+}
+
+.description{
+    height:100px;
+}
+
+#endtime{
+    display: none;
+}
+.help{
+    font-size: smaller;
+}
+.time{
+    display: flex;
+    flex-direction: row;
+}
+.product{
+    width:300px;
+}
+.card-img-top {
+    height: 300px;
+    width:100%;
+}
+
+.card-deck {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+@media and only screen {
+
 }

@@ -3,21 +3,36 @@
 
 
 {% block content %}
-<strong>{{ msg }}</strong>
-<p><b>{{ error }}</b></p>
-  {% if form.errors%}
-    <p> {% trans "Password or username is incorrect" %}</p>
-  {% endif %}
+    <div class="container">
+    <div class="alert alert-danger" role="alert">
+      {{ msg }}
+        {{ error }}
+    </div>
+
+        <p><b></b></p>
+          {% if form.errors%}
+            <div class="alert alert-danger" role="alert">
+              Credentials are not correct
+            </div>
+          {% endif %}
+
+    <div class="row my-3">
+        <H3 class="text-center text-dark rounded mx-auto">Log In</H3>
+    </div>
 
     <form action="" method="post">
         {% csrf_token %}
-        <label for="username">{% trans "Username: " %}</label>
-        <input type="text" name="username" value="" id="username">
-        <label for="password">{% trans "Password: " %}</label>
-        <input type="password" name="password" value="" id="password">
+        <label class="vLargeTextField" for="username">{% trans "Username: " %}</label>
+        <input class="form-control" type="text" name="username" value="" id="username">
+        <label class="vLargeTextField" for="password">{% trans "Password: " %}</label>
+        <input class="form-control" type="password" name="password" value="" id="password">
 
-        <input type="submit" value={% trans "Submit" %}>
+        <input class="my-3 btn btn-primary" type="submit" value={% trans "Submit" %}>
         <input type="hidden" name="next" value="loginpage">
     </form>
+
+
+    </div>
+
 
 {% endblock %}

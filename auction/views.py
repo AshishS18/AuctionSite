@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserCreateForm, createAuction
 from datetime import datetime
 import dateutil.parser
 from .serializers import AuctionSerializer, BidSerializer, UserSerializer
-from rest_framework.views import APIView
+from django.contrib import messages
 from rest_framework import generics
 from .models import User, auction, bid
 from .services import get_users, get_auctions
@@ -155,23 +155,23 @@ def bid_auction(request, id):
             if auctions:
                 auctions = auction.objects.get(id=id)
             else:
-                msg = "Auction not found"
-                return render(request, "auction.html", {'msg': msg})
+                messages.add_message(request, messages.WARNING, 'Auction not found')
+                return redirect('home', msg=messages)
 
+            prev_bids = bid.objects.filter(auctioneer=auctions)
             if auctions.status != 'A':
                 msg = "Auction not active"
-                return render(request, "auction.html", {'auctioneer': auctions, 'msg': msg})
-            if request.user == auctions.seller:
+                return render(request, "auction.html", {'auctioneer': auctions,'bb':prev_bids, 'msg': msg})
+            elif request.user == auctions.seller:
                 msg = "Can not bid on your own auction"
-                return render(request, "auction.html", {'auctioneer': auctions, 'msg': msg})
-            if auctions.base_price > float(amount) or (float(amount) - auctions.base_price < 1):
+                return render(request, "auction.html", {'auctioneer': auctions,'bb':prev_bids, 'msg': msg})
+            elif auctions.base_price > float(amount) or (float(amount) - auctions.base_price < 1):
                 msg = "Amount have to be at least 1 greater than minimum price."
-                return render(request, "auction.html", {'auctioneer': auctions, 'msg': msg})
+                return render(request, "auction.html", {'auctioneer': auctions,'bb':prev_bids, 'msg': msg})
 
             prev_bid_winning = bid.objects.filter(is_winning=True, auctioneer=auctions)
             if prev_bid_winning:
                 prev_bid_winning = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
-            prev_bids = bid.objects.filter(auctioneer=auctions)
             if prev_bid_winning:
                 if prev_bid_winning.user == request.user:
                     msg = "You are already wining this auction."
@@ -202,7 +202,7 @@ def bid_auction(request, id):
             b = bid.objects.filter(is_winning=True, auctioneer=auctions)
             if b:
                 b = bid.objects.filter(is_winning=True, auctioneer=auctions).get()
-            return render(request, "auction.html", {'auctioneer': auctions, 'bb': b})
+            return render(request, "auction.html", {'auctioneer': auctions, 'bb': prev_bids, })
 
         option = request.POST.get('option', '')
         if option == 'Yes':
