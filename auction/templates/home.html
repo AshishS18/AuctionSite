@@ -1,30 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-center">
 
-<div class="alert alert-danger" role="alert">
-      {{ msg }}
-    </div>
-<div class="container">
+<div class="container-fluid col-lg-8">
     <div class="row bg-primary my-3">
         <H3 class="text-center text-light rounded mx-auto">Live Bids</H3>
     </div>
     {%  if not posts %}
         <p>No auctions</p>
     {% endif %}
-    <div class="card-deck px-auto bg-secondary py-3">
+    <div class="card-deck px-auto py-3">
          {%  for post in posts %}
+            {% if post.status == 'A' %}
+               <div class="card product mb-3 " style="min-width: 20rem;max-width: 23rem;">
+               <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
 
-               <div class="card mb-3 " style="min-width: 20rem;max-width: 20rem;">
-               <img class="card-img-top" src="../static/pic.jpg" alt="Card image cap">
                 <div class="card-body">
-                  <h5 class="card-title align-center">{{ post.title }}</h5>
-                    <p>{{ post.description }}</p>
+                    <h3 class="card-title text-center">{{ post.title }}</h3>
+                    <p class="description justify-left">{{ post.description|truncatewords:10 }}</p>
                   <table class="table table-striped">
                       <tr>
                           <td class="px-2">Base Price</td>
-                          <td>{{ post.base_price }}</td>
+                          <td>&#x20b9;{{ post.base_price }}</td>
                       </tr>
                       <tr>
                           <td class="px-2">Ending in</td>
@@ -35,9 +32,90 @@
                           <td >{{ post.seller.username }}</td>
                       </tr>
                   </table>
-                    <button class="btn btn-primary btn-lg" style="width: 100%">Bid Now</button>
+                    <a class="btn btn-primary btn-lg" style="width: 100%" href="/auction/{{ post.id }}/">Bid Now</a>
                 </div>
               </div>
+             {% endif %}
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<div class="container-fluid col-lg-8">
+    <div class="row bg-primary my-3">
+        <H3 class="text-center text-light rounded mx-auto">Upcoming Bids</H3>
+    </div>
+    {%  if not posts %}
+        <p>No auctions</p>
+    {% endif %}
+    <div class="card-deck px-auto py-3">
+         {%  for post in posts %}
+            {% if post.status == 'U' %}
+               <div class="card product mb-3 " style="min-width: 20rem;max-width: 23rem;">
+               <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+
+                <div class="card-body">
+                    <h3 class="card-title text-center">{{ post.title }}</h3>
+                    <p class="description justify-left">{{ post.description|truncatewords:10 }}</p>
+                  <table class="table table-striped">
+                      <tr>
+                          <td class="px-2">Base Price</td>
+                          <td>&#x20b9;{{ post.base_price }}</td>
+                      </tr>
+                      <tr>
+                          <td class="px-2">Ending in</td>
+                          <td>{{ post.end_time }}</td>
+                      </tr>
+                      <tr>
+                          <td class="px-2">Seller</td>
+                          <td >{{ post.seller.username }} </td>
+                      </tr>
+                  </table>
+                    <a class="btn btn-primary btn-lg" style="width: 100%" href="/auction/{{ post.id }}/">Bid Now</a>
+                </div>
+              </div>
+             {% endif %}
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<div class="container-fluid col-lg-8">
+    <div class="row bg-primary my-3">
+        <H3 class="text-center text-light rounded mx-auto">Closed Bids</H3>
+    </div>
+    {%  if not posts %}
+        <p>No auctions</p>
+    {% endif %}
+    <div class="card-deck px-auto py-3">
+         {%  for post in posts %}
+            {% if post.status == 'P' %}
+               <div class="card product mb-3 " style="min-width: 20rem;max-width: 23rem;">
+               <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+
+                <div class="card-body">
+                    <h3 class="card-title text-center">{{ post.title }}</h3>
+                    <p class="description justify-left">{{ post.description|truncatewords:10 }}</p>
+                  <table class="table table-striped">
+                      <tr>
+                          <td class="px-2">Base Price</td>
+                          <td>&#x20b9;{{ post.base_price }}</td>
+                      </tr>
+                      <tr>
+                          <td class="px-2">Ending in</td>
+                          <td>{{ post.end_time }}</td>
+                      </tr>
+                      <tr>
+                          <td class="px-2">Seller</td>
+                          <td >{{ post.seller.username }}</td>
+                      </tr>
+                  </table>
+                    <a class="btn btn-primary btn-lg" style="width: 100%" href="/auction/{{ post.id }}/">Bid Now</a>
+                </div>
+              </div>
+             {% endif %}
         {% endfor %}
 
     </div>

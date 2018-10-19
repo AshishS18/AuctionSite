@@ -1,31 +1,42 @@
-
-<head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
-</head>
-
-
 {% extends "base.html" %}
 <h2>Add Auction</h2>
 {% block content %}
+
+
+<div class="container">
     <strong>{{ msg }}</strong>
 
     <p><b>Add Auction</b></p>
     {% if error %}
         <p><b>{{ error }}</b></p>
     {% endif %}
-
     <form action="/addauction/" method="post" , enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
+
+          {{ form.non_field_errors }}
+
+          {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+          {% endfor %}
+
+          <table>
+            {% for field in form.visible_fields %}
+              <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>
+                  <div class="alert alert-danger msg">{{ field.errors }}</div>
+                  {{ field }}
+                    <div  class="form-text text-muted">{{ field.help_text }}</div>
+
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+    <input class="btn btn-primary" type="submit" value="Add Auction"/>
+</form>
+</div>
+
 
 <script>
        $(function () {

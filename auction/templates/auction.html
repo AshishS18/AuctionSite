@@ -2,37 +2,120 @@
     #endtime{
         display:none;
     }
+  nav{
+    background-color: #2196F3;
+}
 
+
+.accent{
+    background-color:  #FF4081;
+    color: #FFFFFF;
+}
+
+.time{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    max-height:20px;
+}
+.row{
+    align-items: center;
+}
+.time-container{
+    width:100%;
+}
+nav{
+    background-color: #2196F3;
+}
 </style>
 {% extends "base.html" %}
 {% block content %}
-<strong>{{ msg }}</strong>
 <p id="endtime">{{ auctioneer.end_time|date:'Y-m-d'}} {{ auctioneer.end_time|time:"H:i" }}</p>
-<img src="{{ auctioneer.image.url }}">
-<h2>{{ auctioneer.title }}</h2>
-<h4>{{ auctioneer.description }}</h4>
-<p id="demo"></p>
-<font size="2"><p><b>Base price: {{ auctioneer.base_price }}</b></p>
-    <p><b>Seller Name: {{ auctioneer.seller.username }}</b></p>
-    <p><b>Status: {{ auctioneer.status }}</b></p>
-</font>
-{% if bb %}
+       <div class="container">
+        <div class="row py-3 px-3">
+          <h2></h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ auctioneer.image.url }}" class="img-fluid">
+            </div>
+            <div  class="col-md-8 table">
+                        <h3 class="py-3">{{ auctioneer.title }}</h3>
+                 <div class="pull-right">
+                    <form class="form-inline my-2 my-lg-0 " action="/bidauction/{{ auctioneer.id }}/" method="POST">
+                        {% csrf_token %}
+                        <input class="form-control"  type="search" title='am' id='am' name='am' placeholder=" New Bid Amount">&nbsp
+                        <button class="btn accent  my-2 my-sm-0" type="submit">Bid Now</button>
+                    </form>
+                </div>
+                <p class="py-3 col-md-10">{{ auctioneer.description }}</p>
+                <table class="py-3 table table-striped">
+                    <tr>
+                        <td>
+                            Base price
+                        </td>
+                        <td>
+                            &#x20b9;{{ auctioneer.base_price }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                             Seller
+                        </td>
+                        <td>
+                            {{ auctioneer.seller.username }}
+                        </td>
+                    </tr>
+                </table>
+                 <div class="time-container">
+                <div class="card row ml-auto  bg-white rounded  my-3 p-3">
+                    <div class="col-lg-6  col-lg-8 pull-right time">
+                        <h3 class="input-lg">End time : &nbsp </h3>
+                        <div class="pull-right">
+                           <H3 id="demo"></H3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<p id="message"></p>
-{% for b in bb %}<FONT COLOR="#000EE9"><h4>Bid amount {{ b.amount }}, Bidder: {{ b.user }}, Bid Time: {{ b.bid_time }}</h4></FONT>{% endfor %}
-{% endif %}
+            <div class="card w-100 bg-white rounded p-3 my-3">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                            Bid amount
+                        </th>
+                        <th>
+                            Bidder
+                        </th>
+                        <th>
+                            Bid Time
+                        </th>
+                    </tr>
+                    </thead>
+                    {% for b in bb %}
+
+                        <tr>
+                            <td>
+                                &#x20b9;{{ b.amount }}
+                            </td>
+                            <td>
+                                {{ b.user }}
+                            </td>
+                            <td>
+                                {{ b.bid_time }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+    </div>
 
 
-<div style="text-align: left;">
-    <h3></h3>
-    <form action="/bidauction/{{ auctioneer.id }}/" method="POST">
-        {% csrf_token %}
-        <input type="search" title='am' id='am' name='am' placeholder="amount">
-        <input type="submit" value="Bid">
 
-    </form>
-
-</div>
 
 <script>
    {#var time = document.getElementById('endtime1').value;#}

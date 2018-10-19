@@ -7,10 +7,52 @@
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
 
+.accent{
+    background-color:  #FF4081;;
+}
 
 a{
     text-decoration: none;
 }
 nav{
-    background-color: #2196F3;
+    background-color: #1976D2;
+}
+
+.justify-left {
+    margin-right: auto;
+}
+
+.time-container{
+
+}
+
+.description{
+    height:100px;
+}
+
+#endtime{
+    display: none;
+}
+.help{
+    font-size: smaller;
+}
+.time{
+    display: flex;
+    flex-direction: row;
+}
+.product{
+    width:300px;
+}
+.card-img-top {
+    height: 300px;
+    width:100%;
+}
+
+.card-deck {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+@media and only screen {
+
 }

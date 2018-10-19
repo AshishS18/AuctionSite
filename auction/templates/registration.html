@@ -1,17 +1,42 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+
 {% block title %}{"Create User"}{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Create an account</h2>
 
-    <form action="" method="post">
-         {% crispy form %}
-        <input type="submit" value="Submit">
-    </form>
+ <div class="container">
+    <h2>Registration Form</h2>
 
-</div>
+    <form class="table" method="post" action="{% url 'register' %}" >
+          {% csrf_token %}
+
+          {{ form.non_field_errors }}
+
+          {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+          {% endfor %}
+
+          <table>
+            {% for field in form.visible_fields %}
+              <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>
+                  <div class="alert alert-danger msg">{{ field.errors }}</div>
+                  {{ field }}
+                    <div  class="form-text text-muted">{{ field.help_text }}</div>
+
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+
+          <input class="btn btn-primary" type="submit" value="Register"/>
+        </form>
+
+
+    </div>
 
 
 {% endblock %}
