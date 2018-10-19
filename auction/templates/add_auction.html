@@ -1,38 +1,20 @@
 {% extends "base.html" %}
-<h2>Add Auction</h2>
+{% load crispy_forms_tags %}
 {% block content %}
+<nav>
 
-
-<div class="container">
+</nav>
+<div class="container mx-auto">
     <strong>{{ msg }}</strong>
 
-    <p><b>Add Auction</b></p>
+    <h4 class="py-3 my-3">Add Auction</h4>
     {% if error %}
         <p><b>{{ error }}</b></p>
     {% endif %}
-    <form action="/addauction/" method="post" , enctype="multipart/form-data">
+    <form role="form" action="/addauction/" method="post" , enctype="multipart/form-data">
         {% csrf_token %}
 
-          {{ form.non_field_errors }}
-
-          {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field.errors }}
-            {{ hidden_field }}
-          {% endfor %}
-
-          <table>
-            {% for field in form.visible_fields %}
-              <tr>
-                <th>{{ field.label_tag }}</th>
-                <td>
-                  <div class="alert alert-danger msg">{{ field.errors }}</div>
-                  {{ field }}
-                    <div  class="form-text text-muted">{{ field.help_text }}</div>
-
-                </td>
-              </tr>
-            {% endfor %}
-          </table>
+          {{   form }}
     <input class="btn btn-primary" type="submit" value="Add Auction"/>
 </form>
 </div>
@@ -44,4 +26,3 @@
    });
 </script>
 {% endblock %}
-

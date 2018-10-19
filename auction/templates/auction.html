@@ -57,7 +57,7 @@ nav{
             <div  class="col-md-8 table">
                         <h3 class="py-3">{{ auctioneer.title }}</h3>
                  <div class="pull-right">
-                     {% if auctioneer.status == 'A' and auctioneer.seller.username != request.user.username %}
+                     {% if auctioneer.status == 'A' and auctioneer.seller.username != request.user.username and user.is_authenticated %}
                     <form class="form-inline my-2 my-lg-0 " action="/bidauction/{{ auctioneer.id }}/" method="POST">
                         {% csrf_token %}
                         <input class="form-control"  type="search" title='am' id='am' name='am' placeholder=" New Bid Amount">&nbsp

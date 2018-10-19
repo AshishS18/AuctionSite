@@ -22,10 +22,11 @@ class createAuction(forms.ModelForm):
                    'image': forms.FileInput(attrs={'class': 'form-control'})}
         helper = FormHelper()
 
-
     def __init__(self, *args, **kwargs):
         super(createAuction, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control input-xxlarge'
 
 class UserCreateForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -35,13 +36,11 @@ class UserCreateForm(UserCreationForm):
         fields = ("username", "email", "password1", "password2")
         helper = FormHelper()
 
-
-
     def __init__(self, *args, **kwargs):
         super(UserCreateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['class'] = 'form-control input-xxlarge'
 
     def save(self, commit=True):
         user = super(UserCreateForm, self).save(commit=False)

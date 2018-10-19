@@ -5,14 +5,17 @@
 </head>
 <body>
 <div class="container my-3 py-3">
-    <div class="row">
-        <h3 class="justify-left">{{ user.username }} </h3>
-        <h3 class="justify-right">{{ user.email }}</h3>
-    </div>
-    <h3>Your Added Auctions</h3>
+     <div >
+         <div class="row">
+                <h3 class="justify-left text-capitalize"><i class="fas fa-user"></i>&nbsp{{ user.username }} </h3>
+                <h3 class="justify-right"><i class="fas fa-envelope"></i>&nbsp{{ user.email }}</h3>
+         </div>
+
+
+         <h3 class="dark-primary-color text-light py-3 text-center">Your Added Auctions</h3>
     <div class="table-responsive">
-        <table class="table table-striped">
-            <xthead>
+        <table class="table table-striped my-3 py-3">
+            <thead>
                 <tr>
                     <th>Product Name</th>
                     <th>Product Location</th>
@@ -20,15 +23,15 @@
                     <th>End Time</th>
                     <th>Base Price</th>
                 </tr>
-            </xthead>
+            </thead>
             <tbody id="add_product_in_table">
             </tbody>
         </table>
     </div>
-    <h3>Your Added Bids</h3>
+    <h3 class="dark-primary-color text-light py-3 text-center">Your Added Bids</h3>
     <div class="table-responsive">
-        <table class="table table-striped">
-            <xthead>
+        <table class="table table-striped my-3 py-3">
+            <thead>
                 <tr>
                     <th>Product Name</th>
                     <th>Product Location</th>
@@ -36,11 +39,14 @@
                     <th>Amount</th>
     {#                <th>is_winning</th>#}
                 </tr>
-            </xthead>
+            </thead>
             <tbody id="add_bid_in_table">
             </tbody>
         </table>
     </div>
+
+    </div>
+
 </div>
 <script>
     function user_auction() {
