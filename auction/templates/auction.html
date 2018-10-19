@@ -38,6 +38,10 @@ nav{
         <p id="endtime">{{ auctioneer.start_time|date:'Y-m-d'}} {{ auctioneer.start_time|time:"H:i" }}</p>
     {% endif %}
 
+    {% if auctioneer.status == 'F' %}
+        <p id="endtime">{{ auctioneer.end_time|date:'Y-m-d'}} {{ auctioneer.end_time|time:"H:i" }}</p>
+    {% endif %}
+
        <div class="container">
         <div class="row py-3 px-3">
           <h2></h2>
