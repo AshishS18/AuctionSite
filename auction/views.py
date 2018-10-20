@@ -66,7 +66,7 @@ def login_view(request):
                     login(request, user)
                     posts = auction.objects.all()
                     message = "Log in successful"
-                    return render(request, "home.html", {'msg': message, 'posts': posts})
+                    return redirect("/home/", {'msg': message}, permanent=True)
             else:
                 posts = auction.objects.all()
                 message = "Log in fail"
@@ -174,9 +174,12 @@ def bid_auction(request, id):
                 if prev_bid_winning.user == request.user:
                     msg = "You are already wining this auction."
                     return render(request, "auction.html", {'auctioneer':auctions,'bb': prev_bids, 'msg': msg})
+                if float(amount) <= prev_bid_winning.amount:
+                    msg = "Bid has to be greater than previous bid."
+                    return render(request, "auction.html", {'auctioneer': auctions, 'bb': prev_bids, 'msg': msg})
                 if float(amount) - prev_bid_winning.amount < 1:
                     msg = "Bid has to be at atleast 1 greater than previous bids."
-                    return render("auction.html", {'auctioneer':auctions,'bb': prev_bids, 'msg': msg})
+                    return render(request, "auction.html", {'auctioneer':auctions,'bb': prev_bids, 'msg': msg})
 
                 prev_bid_winning.is_winning = False
                 prev_bid_winning.save()
