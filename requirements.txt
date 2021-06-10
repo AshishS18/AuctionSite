@@ -1,6 +1,6 @@
 certifi==2018.10.15
 chardet==3.0.4
-Django==2.1.2
+Django==2.2.24
 django-datetime-widget==0.9.3
 django-datetimepicker==3.14
 djangorestframework==3.8.2
